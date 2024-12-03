@@ -1,8 +1,13 @@
-import React from 'react'
+import Navbar from "../../components/navbar";
 
 const WhatWeDo = () => {
   return (
-    <div>WhatWeDo</div>
+    <>
+    <Navbar />
+    <div>
+
+    </div>
+    </>
   )
 }
 
