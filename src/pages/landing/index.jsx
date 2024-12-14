@@ -5,8 +5,34 @@ import mother from "../../assets/images/mother.jpg";
 import { Eye, Goal, HandHeart } from "lucide-react";
 import { Link } from 'react-router-dom';
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import Footer from "../../components/footer";
 
 const Landing = () => {
+
+  const [showScrollButton, setShowScrollButton] = useState(false);
+    // Handle scroll events to toggle button visibility
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 200) {
+                setShowScrollButton(true);
+            } else {
+                setShowScrollButton(false);
+            }
+        };
+        window.addEventListener("scroll", handleScroll);
+
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    // Scroll to top logic
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    };
+
   return (
     <>
       <Navbar />
@@ -80,7 +106,7 @@ const Landing = () => {
         </div>
 
         {/* Mission and Vision Section */}
-        <div className="relative py-20 px-6 sm:px-10 md:px-16 lg:px-24">
+        <div className="relative py-20 px-6 sm:px-10 md:px-16 lg:px-24 mb-28"> 
           {/* Background Image */}
           <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -110,10 +136,21 @@ const Landing = () => {
             </div>
           </div>
         </div>
-
-
-
       </div>
+       {/* Scroll to Top Button */}
+       {showScrollButton && (
+                <motion.button
+                    onClick={scrollToTop}
+                    className="fixed bottom-5 right-5 bg-[#088E31] text-white p-4 rounded-full shadow-lg hover:bg-green-600 focus:outline-none"
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3 }}
+                    whileHover={{ scale: 1.1 }}
+                >
+                    ↑
+                </motion.button>
+            )}
+      <Footer />
     </>
   );
 };

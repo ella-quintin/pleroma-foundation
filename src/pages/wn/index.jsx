@@ -1,27 +1,53 @@
 import Navbar from "../../components/navbar";
 import { motion } from "framer-motion";
 import woman from "../../assets/woman.jpg";
+import { useState, useEffect } from "react";
+import Footer from "../../components/footer";
 
 
 const New = () => {
+
+  const [showScrollButton, setShowScrollButton] = useState(false);
+    // Handle scroll events to toggle button visibility
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 200) {
+                setShowScrollButton(true);
+            } else {
+                setShowScrollButton(false);
+            }
+        };
+        window.addEventListener("scroll", handleScroll);
+
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    // Scroll to top logic
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    };
+
   return (
     <>
       <Navbar />
       {/* About Us Section */}
       <motion.div
-        className="py-16 px-6 md:px-12 bg-gray-100"
+        className="py-16 px-6 md:px-12 bg-gray-100 "
         whileInView={{
           x: 0,
           opacity: 1,
         }}
         initial={{ x: "0vw", opacity: 0 }}
-        viewport={{ once: false, amount: 0.5 }} // Changed once to false to make it trigger on every scroll
+        viewport={{ once: false, amount: 0.5 }} 
         transition={{ duration: 1, ease: "easeOut" }}
       >
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center m-16">
           <div className="md:w-1/2 mb-8 md:mb-0">
             <motion.h4
-              className="text-green-500 uppercase tracking-wide font-semibold mb-2"
+              className="text-[#1D6205] uppercase tracking-wide font-semibold mb-2"
               initial={{ x: -50, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
               transition={{ duration: 1 }}
@@ -80,6 +106,22 @@ const New = () => {
           </motion.div>
         </div>
       </motion.div>
+
+
+       {/* Scroll to Top Button */}
+       {showScrollButton && (
+                <motion.button
+                    onClick={scrollToTop}
+                    className="fixed bottom-5 right-5 bg-[#088E31] text-white p-4 rounded-full shadow-lg hover:bg-green-600 focus:outline-none"
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3 }}
+                    whileHover={{ scale: 1.1 }}
+                >
+                    ↑
+                </motion.button>
+            )}
+      <Footer/>
     </>
   )
 }

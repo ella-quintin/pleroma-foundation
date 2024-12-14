@@ -1,8 +1,35 @@
 import woman from "../../assets/woman.jpg";
 import Navbar from '../../components/navbar';
 import man from "../../assets/man.jpg";
+import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import Footer from "../../components/footer";
 
 const WhoWeAre = () => {
+
+  const [showScrollButton, setShowScrollButton] = useState(false);
+    // Handle scroll events to toggle button visibility
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 200) {
+                setShowScrollButton(true);
+            } else {
+                setShowScrollButton(false);
+            }
+        };
+        window.addEventListener("scroll", handleScroll);
+
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    // Scroll to top logic
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    };
+
   return (
     <>
       <Navbar />
@@ -18,7 +45,7 @@ const WhoWeAre = () => {
         </div>
 
         {/* Welcome Section */}
-        <div className="container mx-auto mt-12  py-16 px-6 lg:px-8 max-w-screen-lg grid lg:grid-cols-2 gap-8">
+        <div className="container mx-auto mt-12  py-16 px-6 lg:px-8 max-w-screen-lg grid lg:grid-cols-2 gap-8 m-24">
           {/* Text Content */}
           <div>
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">
@@ -60,9 +87,21 @@ const WhoWeAre = () => {
             />
           </div>
         </div>
-
-
       </div>
+       {/* Scroll to Top Button */}
+       {showScrollButton && (
+                <motion.button
+                    onClick={scrollToTop}
+                    className="fixed bottom-5 right-5 bg-[#088E31] text-white p-4 rounded-full shadow-lg hover:bg-green-600 focus:outline-none"
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3 }}
+                    whileHover={{ scale: 1.1 }}
+                >
+                    ↑
+                </motion.button>
+            )}
+      <Footer/>
     </>
   );
 };

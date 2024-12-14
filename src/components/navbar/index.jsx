@@ -49,7 +49,7 @@ const Navbar = () => {
                 <div className="container mx-auto flex items-center justify-between px-4 md:px-6">
                     {/* Logo */}
                     <div className="flex items-center">
-                        <img src={logo} alt="Logo" className="h-16 sm:h-20" />
+                        <img src={logo} alt="Logo" className="h-24 sm:h-28" />
                     </div>
 
                     {/* Navigation Links */}
@@ -82,6 +82,14 @@ const Navbar = () => {
                             >
                                 How We Do It
                             </Link>
+                            <Link
+                                to="/how-we-do-it#programs"
+                                className="block md:inline py-2 md:py-0 text-black hover:text-[#1D6205] text-center"
+                            >
+                                Our Programs
+                            </Link>
+
+
                             <Link
                                 to="/whats-new"
                                 className="block md:inline py-2 md:py-0 text-black hover:text-[#1D6205] text-center"

@@ -1,5 +1,5 @@
 import Navbar from "../../components/navbar";
-import { Briefcase, Heart, Users, Book } from "lucide-react";
+import { Briefcase, Heart, Users, Book, Video, PersonStanding, Baby, BookOpen, Soup } from "lucide-react";
 import man from "../../assets/man.jpg";
 import womanTwo from "../../assets/images/womanTwo.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -7,42 +7,109 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import { motion } from "framer-motion";
+import { useRef } from "react";
+import { useState, useEffect } from "react";
+import Footer from "../../components/footer";
 
 const HowWeWork = () => {
+  const programsRef = useRef(null);
+  useEffect(() => {
+    // Check if the hash is present in the URL
+    if (window.location.hash === "#programs") {
+      programsRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, []);
+
+  const [showScrollButton, setShowScrollButton] = useState(false);
+    // Handle scroll events to toggle button visibility
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 200) {
+                setShowScrollButton(true);
+            } else {
+                setShowScrollButton(false);
+            }
+        };
+        window.addEventListener("scroll", handleScroll);
+
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    // Scroll to top logic
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    };
+
   const programs = [
     {
       id: 1,
-      title: "Entrepreneurship Development",
+      title: "Mustard Seed Christian Entrepreneurship Development Program",
       description:
-        "Through the Mustard Seed Christian Entrepreneurship Program, we empower businesses to thrive under Christian principles.",
+        "Empowering businesses to thrive under Christian principles through entrepreneurship development.",
       icon: <Briefcase className="w-10 h-10 text-[#1D6205] mr-4" />,
       image: man,
     },
     {
       id: 2,
-      title: "Youth & Children Initiatives",
+      title: "Youth For Jesus (Y4J) Initiative",
       description:
-        "Programs like Youth for Jesus (Y4J) and Children for Jesus (C4J) include annual camp meetings to nurture their faith.",
-      icon: <Users className="w-10 h-10 text-[#1D6205] mr-4" />,
+        "A faith-building initiative aimed at equipping the youth to live Christ-centered lives.",
+      icon: <PersonStanding className="w-10 h-10 text-[#1D6205] mr-4" />,
       image: man,
     },
     {
       id: 3,
-      title: "Schools of Ministry",
+      title: "Children For Jesus (C4J) Initiative",
       description:
-        "Masterclasses like the School of Evangelism and Sycamore School of Christian Leadership build future leaders for Christ.",
-      icon: <Book className="w-10 h-10 text-[#1D6205] mr-4" />,
+        "Programs to nurture and guide children in their faith journey through Christ-centered teachings.",
+      icon: <Baby className="w-10 h-10 text-[#1D6205] mr-4" />,
       image: man,
     },
     {
       id: 4,
-      title: "Community Care",
+      title: "School of Evangelism - Masterclass",
       description:
-        "Initiatives like Home and Day Care for the Aged and the Soup Kitchen provide essential services to the community.",
+        "A masterclass for equipping believers with the knowledge and skills to effectively share the gospel.",
+      icon: <BookOpen className="w-10 h-10 text-[#1D6205] mr-4" />,
+      image: man,
+    },
+    {
+      id: 5,
+      title: "Sycamore School of Christian Leadership - Masterclass",
+      description:
+        "A program to develop Christian leaders equipped to lead with excellence and integrity.",
+      icon: <Book className="w-10 h-10 text-[#1D6205] mr-4" />,
+      image: man,
+    },
+    {
+      id: 6,
+      title: "Home and Day Care for the Aged",
+      description:
+        "Providing compassionate care and support for the elderly within the community.",
       icon: <Heart className="w-10 h-10 text-[#1D6205] mr-4" />,
       image: man,
     },
+    {
+      id: 7,
+      title: "Soup Kitchen",
+      description:
+        "Serving warm meals to the needy, embodying the love and compassion of Christ.",
+      icon: <Soup className="w-10 h-10 text-[#1D6205] mr-4" />,
+      image: man,
+    },
+    {
+      id: 8,
+      title: "Pleroma-Sycamore Media Ministry",
+      description:
+        "Using media to spread the gospel and positively influence communities through Christ-centered content.",
+      icon: <Video className="w-10 h-10 text-[#1D6205] mr-4" />,
+      image: man,
+    },
   ];
+  
 
   return (
     <>
@@ -78,36 +145,36 @@ const HowWeWork = () => {
             >
               Guided by the Holy Spirit
             </motion.h4> */}
-           <motion.h2
-  className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
-  initial={{ x: 50, opacity: 0 }}
-  whileInView={{ x: 0, opacity: 1 }}
-  transition={{ duration: 1 }}
->
-  Guided by the Holy Spirit
-</motion.h2>
+            <motion.h2
+              className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
+              initial={{ x: 50, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              transition={{ duration: 1 }}
+            >
+              Guided by the Holy Spirit
+            </motion.h2>
 
-<motion.p
-  className="text-gray-600 text-base md:text-lg mb-6"
-  initial={{ y: 50, opacity: 0 }}
-  whileInView={{ y: 0, opacity: 1 }}
-  transition={{ duration: 1 }}
->
-  We believe in partnerships that are spirit-led, creating programs and initiatives that bring transformation to businesses, communities, and the world at large.
-</motion.p>
+            <motion.p
+              className="text-gray-600 text-base md:text-lg mb-6"
+              initial={{ y: 50, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ duration: 1 }}
+            >
+              We believe in partnerships that are spirit-led, creating programs and initiatives that bring transformation to businesses, communities, and the world at large.
+            </motion.p>
 
-<motion.ul
-  className="list-disc list-inside text-gray-600 text-base md:text-lg space-y-4"
-  initial={{ y: 50, opacity: 0 }}
-  whileInView={{ y: 0, opacity: 1 }}
-  transition={{ duration: 1 }}
->
-  <li>By supporting Christian business through entrepreneurship development.</li>
-  <li>By supporting the evangelistic move and providing social interventions in our communities.</li>
-  <li>By setting up homes for the aged and children care within our social setting.</li>
-  <li>By setting up and operating a Christian resource center where Christians of all denominations can come together to praise, worship, and honor our God.</li>
-  <li>By setting up a worldwide Christian media ministry to the world.</li>
-</motion.ul>
+            <motion.ul
+              className="list-disc list-inside text-gray-600 text-base md:text-lg space-y-4"
+              initial={{ y: 50, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ duration: 1 }}
+            >
+              <li>By supporting Christian business through entrepreneurship development.</li>
+              <li>By supporting the evangelistic move and providing social interventions in our communities.</li>
+              <li>By setting up homes for the aged and children care within our social setting.</li>
+              <li>By setting up and operating a Christian resource center where Christians of all denominations can come together to praise, worship, and honor our God.</li>
+              <li>By setting up a worldwide Christian media ministry to the world.</li>
+            </motion.ul>
 
           </div>
           <motion.div
@@ -117,7 +184,7 @@ const HowWeWork = () => {
             transition={{ duration: 1, delay: 1.2 }}
           >
             <img
-              src={man} // Replace with your image path
+              src={man}
               alt="About Us"
               className="rounded-full shadow-lg w-64 h-64 md:w-80 md:h-80 object-cover"
             />
@@ -128,7 +195,11 @@ const HowWeWork = () => {
       <div className="px-6 sm:px-10 md:px-16 lg:px-24 py-8 bg-[#f9f9f9]">
 
         {/* Programs Section */}
-        <div className="mt-8">
+        <div
+          ref={programsRef}
+          id="programs" // Optional: For better accessibility and easier targeting
+          className="px-6 sm:px-10 md:px-16 lg:px-24 py-8 bg-[#f9f9f9] m-12"
+        >
           <h2 className="text-[#1D6205] font-bold text-2xl sm:text-3xl lg:text-4xl mb-8 text-center">
             Our Programs
           </h2>
@@ -169,6 +240,20 @@ const HowWeWork = () => {
           </Swiper>
         </div>
       </div>
+       {/* Scroll to Top Button */}
+       {showScrollButton && (
+                <motion.button
+                    onClick={scrollToTop}
+                    className="fixed bottom-5 right-5 bg-[#088E31] text-white p-4 rounded-full shadow-lg hover:bg-green-600 focus:outline-none"
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3 }}
+                    whileHover={{ scale: 1.1 }}
+                >
+                    ↑
+                </motion.button>
+            )}
+      <Footer/>
     </>
   );
 };
