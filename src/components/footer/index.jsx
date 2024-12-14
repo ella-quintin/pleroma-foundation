@@ -31,12 +31,12 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-[#1D6205] text-white py-12 pt-16">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 px-4 sm:px-6 md:px-8 text-center md:text-left">
+    <footer className="bg-[#1D6205] text-white py-12 pt-16 overflow-hidden">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 px-4 sm:px-6 md:px-8">
         {/* Company Info + Social Links */}
         <div className="flex flex-col text-left">
           <p className="text-sm md:text-base leading-relaxed text-left mb-6">
-          <h3 className="text-base font-bold mb-4">Pleroma Sycamore Foundation</h3>
+            <h3 className="text-base font-bold mb-4">Pleroma Sycamore Foundation</h3>
             Pleroma Sycamore Foundation is a divine inspiration, established to enforce God’s will on earth through impactful partnerships and spirit-filled initiatives.
           </p>
           <h3 className="text-base text-left font-bold mb-3">Social Media</h3>

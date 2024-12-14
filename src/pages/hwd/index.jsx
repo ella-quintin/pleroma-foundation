@@ -1,5 +1,6 @@
 import Navbar from "../../components/navbar";
 import { Briefcase, Heart, Users, Book, Video, PersonStanding, Baby, BookOpen, Soup } from "lucide-react";
+import boy from "../../assets/boy.jpg";
 import man from "../../assets/man.jpg";
 import womanTwo from "../../assets/images/womanTwo.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -21,27 +22,27 @@ const HowWeWork = () => {
   }, []);
 
   const [showScrollButton, setShowScrollButton] = useState(false);
-    // Handle scroll events to toggle button visibility
-    useEffect(() => {
-        const handleScroll = () => {
-            if (window.scrollY > 200) {
-                setShowScrollButton(true);
-            } else {
-                setShowScrollButton(false);
-            }
-        };
-        window.addEventListener("scroll", handleScroll);
-
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
-
-    // Scroll to top logic
-    const scrollToTop = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-        });
+  // Handle scroll events to toggle button visibility
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 200) {
+        setShowScrollButton(true);
+      } else {
+        setShowScrollButton(false);
+      }
     };
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Scroll to top logic
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   const programs = [
     {
@@ -109,151 +110,110 @@ const HowWeWork = () => {
       image: man,
     },
   ];
-  
+
 
   return (
     <>
       <Navbar />
 
       {/* Header Section */}
-      <div className="relative w-full h-64 bg-cover bg-center" style={{ backgroundImage: `url(${womanTwo})` }}>
+      <div
+        className="relative w-full h-64 bg-cover bg-center overflow-hidden"
+        style={{ backgroundImage: `url(${womanTwo})` }}
+      >
         <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center">
-          <h3 className="text-white text-4xl font-bold">How We Work</h3>
+          <h3 className="text-white text-2xl sm:text-3xl lg:text-4xl font-bold text-center">
+            How We Work
+          </h3>
         </div>
       </div>
 
-      {/* New Section Beneath Header */}
-
-      {/* About Us Section */}
       <motion.div
-        className="py-16 px-6 md:px-12 bg-gray-100"
-        whileInView={{
-          x: 0,
-          opacity: 1,
-        }}
-        initial={{ x: "0vw", opacity: 0 }}
-        viewport={{ once: false, amount: 0.5 }} // Changed once to false to make it trigger on every scroll
-        transition={{ duration: 1, ease: "easeOut" }}
+        className="py-12 px-4 sm:px-6 lg:px-12 bg-gray-100 overflow-hidden"
       >
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center">
-          <div className="md:w-1/2 mb-8 md:mb-0">
-            {/* <motion.h4
-              className="text-green-500 uppercase tracking-wide font-semibold mb-2"
-              initial={{ x: -50, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              transition={{ duration: 1 }}
-            >
-              Guided by the Holy Spirit
-            </motion.h4> */}
-            <motion.h2
-              className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
-              initial={{ x: 50, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              transition={{ duration: 1 }}
-            >
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <div>
+            <motion.h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-4">
               Guided by the Holy Spirit
             </motion.h2>
-
-            <motion.p
-              className="text-gray-600 text-base md:text-lg mb-6"
-              initial={{ y: 50, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1 }}
-            >
-              We believe in partnerships that are spirit-led, creating programs and initiatives that bring transformation to businesses, communities, and the world at large.
+            <motion.p className="text-gray-600 text-base sm:text-lg mb-6">
+              We believe in partnerships that are spirit-led, creating programs and initiatives that bring transformation.
             </motion.p>
-
-            <motion.ul
-              className="list-disc list-inside text-gray-600 text-base md:text-lg space-y-4"
-              initial={{ y: 50, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1 }}
-            >
-              <li>By supporting Christian business through entrepreneurship development.</li>
-              <li>By supporting the evangelistic move and providing social interventions in our communities.</li>
-              <li>By setting up homes for the aged and children care within our social setting.</li>
-              <li>By setting up and operating a Christian resource center where Christians of all denominations can come together to praise, worship, and honor our God.</li>
-              <li>By setting up a worldwide Christian media ministry to the world.</li>
+            <motion.ul className="list-disc pl-5 space-y-2 text-gray-600 text-sm sm:text-base">
+              <li>Supporting Christian businesses through entrepreneurship development.</li>
+              <li>Providing social interventions in our communities.</li>
+              <li>Setting up homes for the aged and childcare programs.</li>
+              <li>Operating a Christian resource center for worship and praise.</li>
+              <li>Expanding a global Christian media ministry.</li>
             </motion.ul>
-
           </div>
-          <motion.div
-            className="md:w-1/2 flex justify-center"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1.2 }}
-          >
+          <motion.div className="flex justify-center">
             <img
-              src={man}
+              src={boy}
               alt="About Us"
-              className="rounded-full shadow-lg w-64 h-64 md:w-80 md:h-80 object-cover"
+              className=" rounded-2xl shadow-lg w-full h-full sm:w-96 sm:h-96 object-cover"
             />
           </motion.div>
         </div>
       </motion.div>
 
-      <div className="px-6 sm:px-10 md:px-16 lg:px-24 py-8 bg-[#f9f9f9]">
-
-        {/* Programs Section */}
-        <div
-          ref={programsRef}
-          id="programs" // Optional: For better accessibility and easier targeting
-          className="px-6 sm:px-10 md:px-16 lg:px-24 py-8 bg-[#f9f9f9] m-12"
-        >
+      <div className="px-4 sm:px-8 lg:px-16 py-8 bg-[#f9f9f9]">
+        <div ref={programsRef} id="programs" className="py-8">
           <h2 className="text-[#1D6205] font-bold text-2xl sm:text-3xl lg:text-4xl mb-8 text-center">
             Our Programs
           </h2>
-
-          {/* Slider */}
-          <Swiper
-            modules={[Navigation]}
-            navigation
-            spaceBetween={30}
-            slidesPerView={1}
-            breakpoints={{
-              640: { slidesPerView: 1 },
-              768: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
-            }}
-            className="max-w-6xl mx-auto"
-          >
-            {programs.map((program) => (
-              <SwiperSlide key={program.id}>
-                <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-                  <img
-                    src={program.image}
-                    alt={program.title}
-                    className="w-full h-48 object-cover"
-                  />
-                  <div className="p-6">
-                    <div className="flex items-center mb-4">
-                      {program.icon}
-                      <h3 className="font-bold text-lg text-gray-800">
-                        {program.title}
-                      </h3>
+          <div className="overflow-hidden">
+            <Swiper
+              modules={[Navigation]}
+              navigation
+              spaceBetween={16}
+              slidesPerView={1}
+              breakpoints={{
+                640: { slidesPerView: 1 },
+                768: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 },
+              }}
+              className="max-w-full mx-auto"
+            >
+              {programs.map((program) => (
+                <SwiperSlide key={program.id}>
+                  <div className="bg-white rounded-lg shadow-lg overflow-hidden w-72 mx-auto">
+                    <img
+                      src={program.image}
+                      alt={program.title}
+                      className="w-full h-48 object-cover"
+                    />
+                    <div className="p-4">
+                      <div className="flex items-center mb-3">
+                        {program.icon}
+                        <h3 className="font-bold text-md text-gray-800">{program.title}</h3>
+                      </div>
+                      <p className="text-gray-600 text-sm">{program.description}</p>
                     </div>
-                    <p className="text-gray-600">{program.description}</p>
                   </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+                </SwiperSlide>
+
+              ))}
+            </Swiper>
+          </div>
         </div>
       </div>
-       {/* Scroll to Top Button */}
-       {showScrollButton && (
-                <motion.button
-                    onClick={scrollToTop}
-                    className="fixed bottom-5 right-5 bg-[#088E31] text-white p-4 rounded-full shadow-lg hover:bg-green-600 focus:outline-none"
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.3 }}
-                    whileHover={{ scale: 1.1 }}
-                >
-                    ↑
-                </motion.button>
-            )}
-      <Footer/>
+
+      {showScrollButton && (
+        <motion.button
+          onClick={scrollToTop}
+          className="fixed bottom-5 right-5 bg-[#088E31] text-white p-4 rounded-full shadow-lg hover:bg-green-600 focus:outline-none"
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.3 }}
+          whileHover={{ scale: 1.1 }}
+        >
+          ↑
+        </motion.button>
+      )}
+
+
+      <Footer />
     </>
   );
 };

@@ -1,6 +1,7 @@
 import Navbar from "../../components/navbar";
 import man from "../../assets/man.jpg";
 import woman from "../../assets/woman.jpg";
+import herotwo from "../../assets/images/herotwo.jpg";
 import mother from "../../assets/images/mother.jpg";
 import { Eye, Goal, HandHeart } from "lucide-react";
 import { Link } from 'react-router-dom';
@@ -40,7 +41,7 @@ const Landing = () => {
         {/* Hero Section */}
         <motion.div
           className="relative w-full h-screen bg-cover bg-center"
-          style={{ backgroundImage: `url(${woman})` }}
+          style={{ backgroundImage: `url(${herotwo})` }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
