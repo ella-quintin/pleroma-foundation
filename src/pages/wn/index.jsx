@@ -1,7 +1,6 @@
 import Navbar from "../../components/navbar";
 import { motion } from "framer-motion";
-import woman from "../../assets/woman.jpg";
-import heroTwo from '../../assets/images/heroTwo.jpg'
+import heroTwo from '../../assets/images/herotwo.jpg'
 import { useState, useEffect } from "react";
 import Footer from "../../components/footer";
 
