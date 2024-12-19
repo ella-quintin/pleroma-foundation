@@ -36,7 +36,7 @@ const Footer = () => {
         {/* Company Info + Social Links */}
         <div className="flex flex-col text-left">
           <h3 className="text-lg font-bold mb-4">Pleroma Sycamore Foundation</h3>
-          <p className="text-sm md:text-sm text-gray-300 leading-relaxed font-thin text-left mb-6">
+          <p className="text-sm md:text-sm text-white hover:text-gray-100 leading-relaxed font-thin text-left mb-6">
             Pleroma Sycamore Foundation is a divine inspiration, established to enforce God’s will on earth through impactful partnerships and spirit-filled initiatives.
           </p>
           <h3 className="text-lg text-left font-bold mb-3">Social Media</h3>
@@ -51,7 +51,7 @@ const Footer = () => {
         <div className="flex flex-col text-left">
           <div className="mb-6">
             <h3 className="text-lg font-bold mb-4">Quick Links</h3>
-            <ul className="space-y-3 text-sm text-gray-300 font-thin">
+            <ul className="space-y-3 text-sm text-white font-thin">
               {[
                 { name: "Home", path: "/" },
                 { name: "Who We Are", path: "/who-we-are" },
@@ -60,7 +60,7 @@ const Footer = () => {
                 { name: "Contact Us", path: "/contact-us" },
               ].map((link, idx) => (
                 <li key={idx}>
-                  <a href={link.path} className="hover:underline">
+                  <a href={link.path} className="hover:underline hover:text-gray-200">
                     {link.name}
                   </a>
                 </li>
@@ -73,7 +73,7 @@ const Footer = () => {
         <div className="flex flex-col text-left">
           <div className="mb-6">
             <h3 className="text-lg font-bold mb-4">Our Programs</h3>
-            <ul className="space-y-3 text-sm font-thin text-gray-300">
+            <ul className="space-y-3 text-sm font-thin text-white hover:text-gray-100">
               <li>Mustard Seed Christian Entrepreneurship Development Program</li>
               <li>Youth For Jesus (Y4J) Initiative</li>
               <li>Children for Jesus (C4J) Initiative </li>
@@ -92,23 +92,23 @@ const Footer = () => {
             <ul className="space-y-4 font-thin">
               <li className="flex items-center">
                 <MapPin className="text-white w-7 h-7 mr-3" />
-                <p className="text-sm sm:text-base text-gray-300">
+                <p className="text-sm sm:text-base text-white hover:text-gray-100">
                   <span className="font-normal text-white">Location:</span> 4 Naa Botwey Street, Mabey, Haatso , Accra, Ghana
                 </p>
               </li>
               <li className="flex items-center">
                 <Phone className="text-white w-6 h-6 mr-3" />
-                <p className="text-sm sm:text-base text-gray-300">
+                <p className="text-sm sm:text-base text-white hover:text-gray-100">
                   <span className="font-normal text-white">Phone:</span> +233-302- 905659 | +233-597-395719
                 </p>
               </li>
               <li className="flex items-center">
                 <Mail className="text-white w-6 h-6 mr-3" />
-                <p className="text-sm sm:text-base text-gray-300">
+                <p className="text-sm sm:text-base text-white hover:text-gray-100">
                   <span className="font-normal text-white">Email:</span>{" "}
                   <a
                     href="mailto:info@pleroma-scycamore.org"
-                    className="hover:underline text-gray-300"
+                    className="hover:underline text-white hover:text-gray-200"
                   >
                     info@pleroma-scycamore.org
                   </a>
