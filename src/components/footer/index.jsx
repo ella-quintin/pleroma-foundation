@@ -35,11 +35,11 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 px-4 sm:px-6 md:px-8">
         {/* Company Info + Social Links */}
         <div className="flex flex-col text-left">
-          <p className="text-sm md:text-base leading-relaxed text-left mb-6">
-            <h3 className="text-base font-bold mb-4">Pleroma Sycamore Foundation</h3>
+          <h3 className="text-lg font-bold mb-4">Pleroma Sycamore Foundation</h3>
+          <p className="text-sm md:text-sm text-gray-300 leading-relaxed font-thin text-left mb-6">
             Pleroma Sycamore Foundation is a divine inspiration, established to enforce God’s will on earth through impactful partnerships and spirit-filled initiatives.
           </p>
-          <h3 className="text-base text-left font-bold mb-3">Social Media</h3>
+          <h3 className="text-lg text-left font-bold mb-3">Social Media</h3>
           <div className="mt-4 flex text-left space-x-4">
             <a href="#" className="hover:text-gray-300"><Facebook size={20} /></a>
             <a href="#" className="hover:text-gray-300"><Twitter size={20} /></a>
@@ -50,8 +50,8 @@ const Footer = () => {
         {/* Quick Links + Help */}
         <div className="flex flex-col text-left">
           <div className="mb-6">
-            <h3 className="text-base font-bold mb-4">Quick Links</h3>
-            <ul className="space-y-3">
+            <h3 className="text-lg font-bold mb-4">Quick Links</h3>
+            <ul className="space-y-3 text-sm text-gray-300 font-thin">
               {[
                 { name: "Home", path: "/" },
                 { name: "Who We Are", path: "/who-we-are" },
@@ -84,8 +84,8 @@ const Footer = () => {
 
         <div className="flex flex-col text-left">
           <div className="mb-6">
-            <h3 className="text-base font-bold mb-4">Our Programs</h3>
-            <ul className="space-y-3">
+            <h3 className="text-lg font-bold mb-4">Our Programs</h3>
+            <ul className="space-y-3 text-sm font-thin text-gray-300">
               <li>Mustard Seed Christian Entrepreneurship Development Program</li>
               <li>Youth For Jesus (Y4J) Initiative</li>
               <li>Children for Jesus (C4J) Initiative </li>
@@ -100,25 +100,30 @@ const Footer = () => {
 
         <div className="flex flex-col text-left">
           <div className="mb-6">
-            <h3 className="text-base font-bold mb-4">Contact</h3>
-            <ul className="space-y-4">
+            <h3 className="text-lg font-bold mb-4">Contact</h3>
+            <ul className="space-y-4 font-thin">
               <li className="flex items-center">
                 <MapPin className="text-white w-7 h-7 mr-3" />
-                <p className="text-sm sm:text-base text-white">
-                  <span className="font-bold">Location:</span> 4 Naa Botwey Street, Mabey, Haatso , Accra, Ghana
+                <p className="text-sm sm:text-base text-gray-300">
+                  <span className="font-normal text-white">Location:</span> 4 Naa Botwey Street, Mabey, Haatso , Accra, Ghana
                 </p>
               </li>
               <li className="flex items-center">
                 <Phone className="text-white w-6 h-6 mr-3" />
-                <p className="text-sm sm:text-base text-white">
-                  <span className="font-bold">Phone:</span> +233-302- 905659 | +233-597-395719
-
+                <p className="text-sm sm:text-base text-gray-300">
+                  <span className="font-normal text-white">Phone:</span> +233-302- 905659 | +233-597-395719
                 </p>
               </li>
               <li className="flex items-center">
                 <Mail className="text-white w-6 h-6 mr-3" />
-                <p className="text-sm sm:text-base text-white">
-                  <span className="font-bold">Email:</span> info@pleroma-scycamore.org
+                <p className="text-sm sm:text-base text-gray-300">
+                  <span className="font-normal text-white">Email:</span>{" "}
+                  <a
+                    href="mailto:info@pleroma-scycamore.org"
+                    className="hover:underline text-gray-300"
+                  >
+                    info@pleroma-scycamore.org
+                  </a>
                 </p>
               </li>
             </ul>
@@ -172,9 +177,11 @@ const Footer = () => {
       </div>
 
       {/* Footer Bottom */}
+
       <div className="mt-12 border-t border-white pt-6 text-center">
         <p className="text-sm">
           &copy; {new Date().getFullYear()} Pleroma Sycamore Foundation. All rights reserved.
+          <a href="https://www.freepik.com" className="text-gray-300 hover:underline" target="_blank" rel="noopener noreferrer"> Freepik</a>
         </p>
       </div>
     </footer >
