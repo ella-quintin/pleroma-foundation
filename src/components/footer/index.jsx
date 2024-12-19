@@ -68,18 +68,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* <div>
-            <h3 className="text-base font-bold mb-4">Help</h3>
-            <ul className="space-y-3">
-              {["Privacy Policy", "Customer Support", "Terms & Conditions"].map((link, idx) => (
-                <li key={idx}>
-                  <a href="/" className="hover:underline">
-                    {link}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div> */}
         </div>
 
         <div className="flex flex-col text-left">
