@@ -1,7 +1,7 @@
 import Navbar from "../../components/navbar";
 import { motion } from "framer-motion";
 import woman from "../../assets/woman.jpg";
-import heroTwo from "../../assets/images/HeroTwo.jpg";
+import heroTwo from '../../assets/images/heroTwo.jpg'
 import { useState, useEffect } from "react";
 import Footer from "../../components/footer";
 
@@ -101,7 +101,7 @@ const New = () => {
               transition={{ duration: 1, delay: 1.2 }}
             >
               <img
-                src={heroTwo} // Replace with your image path
+                src={heroTwo} 
                 alt="About Us"
                 className="rounded-full shadow-lg w-64 h-64 md:w-80 md:h-80 object-cover"
               />
