@@ -110,7 +110,7 @@ const Footer = () => {
                     href="mailto:info@pleroma-scycamore.org"
                     className="hover:underline text-white hover:text-gray-200"
                   >
-                    info@pleroma-scycamore.org
+                    info@pleroma-sycamore.org
                   </a>
                 </p>
               </li>

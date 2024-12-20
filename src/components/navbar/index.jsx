@@ -38,8 +38,8 @@ const Navbar = () => {
             {/* Top Bar */}
             <div className="bg-[#1D6205] text-white py-2 px-4 flex justify-center sm:justify-between text-sm">
                 <div className="hidden sm:flex flex-wrap gap-x-4">
-                    <span>MAIL: contact@ourcharity.com</span>
-                    <span>PHONE: +24 3772 120 091 / +56452 4567</span>
+                    <span>EMAIL: info@pleroma-sycamore.org</span>
+                    <span>PHONE: +233-302- 905659 | +233-597-395719</span>
                 </div>
             </div>
 
@@ -80,7 +80,7 @@ const Navbar = () => {
                                 isActive("/how-we-do-it") ? "text-[#1D6205]" : "text-black"
                             } hover:text-[#1D6205]`}
                         >
-                            How We Do It
+                            How We Work
                         </Link>
                         <Link
                             to="/how-we-do-it#programs"

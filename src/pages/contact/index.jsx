@@ -101,7 +101,7 @@ const Contact = () => {
                     href="mailto:info@pleroma-scycamore.org"
                     className="hover:underline text-black"
                   >
-                    info@pleroma-scycamore.org
+                    info@pleroma-sycamore.org
                   </a>
                 </p>
               </li>
