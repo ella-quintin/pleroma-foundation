@@ -159,7 +159,7 @@ const Landing = () => {
               <Goal className="w-12 h-12 text-[#1D6205] mx-auto mb-4" />
               <h3 className="font-bold text-2xl mb-2 text-white">Mission</h3>
               <p className="text-white">
-                Working with Christian partners to empower God’s work and people to fulfill God’s purpose for the World.
+              Working with Christian partners to empower God's people to fulfil God's purpose for the world.
               </p>
             </motion.div>
           </div>

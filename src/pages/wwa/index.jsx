@@ -72,7 +72,7 @@ const WhoWeAre = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">
-              Inspired by God. Driven by Purpose.
+              Inspired by God; Driven by Purpose
             </h2>
             <motion.div
               className="w-24 h-1 bg-[#1D6205] mb-6"
@@ -83,14 +83,6 @@ const WhoWeAre = () => {
             ></motion.div>
             <p className="text-gray-600 leading-relaxed mb-8">
               Pleroma Sycamore Foundation is a divine inspiration, established to enforce God’s will on earth through impactful partnerships and spirit-filled initiatives.
-
-              Our objectives include:
-
-              Supporting Christian missions, ministries, and outreaches focused on propagating the Word of God.
-              Providing social interventions for the aged and children.
-              Supporting Christian leadership and entrepreneurship development.
-              Offering social housing to alleviate youth challenges.
-              We are committed to creating opportunities for worship, empowerment, and positive transformation.
             </p>
             <p className="text-gray-600 leading-relaxed mb-8">
               We are committed to creating opportunities for worship, empowerment, and positive transformation.
@@ -98,7 +90,7 @@ const WhoWeAre = () => {
             <p className="text-gray-600 leading-relaxed mb-8">
               Our objectives include:
             </p>
-            <ul className="list-disc pl-6 text-gray-600 text-base sm:text-lg mb-6">
+            <ul className="list-disc pl-6 text-gray-600 leading-relaxed sm:text-md mb-6">
               <motion.li
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
@@ -111,7 +103,7 @@ const WhoWeAre = () => {
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
-                Providing social interventions for the aged and children.
+                Providing social interventions for the aged, youth and children.
               </motion.li>
               <motion.li
                 initial={{ opacity: 0 }}
@@ -125,7 +117,7 @@ const WhoWeAre = () => {
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
               >
-                Offering social housing to alleviate youth challenges.
+                Mitigate accommodation challenges through social housing.
               </motion.li>
             </ul>
           </motion.div>
