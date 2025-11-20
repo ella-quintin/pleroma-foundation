@@ -1,14 +1,17 @@
+// src/components/ScrollToTop.jsx
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useNavigation } from "react-router-dom";
 
 const ScrollToTop = () => {
-    const { pathname } = useLocation();
+  const navigation = useNavigation();
 
-    useEffect(() => {
-        window.scrollTo(0, 0); 
-    }, [pathname]);
+  useEffect(() => {
+    if (navigation.state === "idle") {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    }
+  }, [navigation.location?.pathname]);
 
-    return null; 
+  return null;
 };
 
 export default ScrollToTop;

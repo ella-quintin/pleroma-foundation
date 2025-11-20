@@ -38,8 +38,8 @@ const Navbar = () => {
             {/* Top Bar */}
             <div className="bg-[#1D6205] text-white py-2 px-4 flex justify-center sm:justify-between text-sm">
                 <div className="hidden sm:flex flex-wrap gap-x-4">
-                    <span>EMAIL: info@pleroma-sycamore.org</span>
-                    <span>PHONE: +233-302- 905659 | +233-597-395719</span>
+                    <span> <a href="mailto:info@pleroma-sycamore.org">EMAIL: info@pleroma-sycamore.org</a></span>
+                    <span><a href="tel:+233597395719">PHONE: +233-302- 905659 | +233-597-395719</a></span>
                 </div>
             </div>
 
@@ -90,13 +90,29 @@ const Navbar = () => {
                         >
                             Our Programs
                         </Link>
-                        <Link
+                        {/* <Link
                             to="/whats-new"
                             className={`block md:inline py-2 md:py-0 font-medium text-center ${
                                 isActive("/whats-new") ? "text-[#1D6205]" : "text-black"
                             } hover:text-[#1D6205]`}
                         >
                             What's New
+                        </Link> */}
+                        <Link
+                            to="/blog"
+                            className={`block md:inline py-2 md:py-0 font-medium text-center ${
+                                isActive("/blog") ? "text-[#1D6205]" : "text-black"
+                            } hover:text-[#1D6205]`}
+                        >
+                            What's New
+                        </Link>
+                        <Link
+                            to="/gallery"
+                            className={`block md:inline py-2 md:py-0 font-medium text-center ${
+                                isActive("/gallery") ? "text-[#1D6205]" : "text-black"
+                            } hover:text-[#1D6205]`}
+                        >
+                            Gallery
                         </Link>
                         <Link
                             to="/contact-us"

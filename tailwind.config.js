@@ -9,6 +9,8 @@ export default {
       scrollBehavior: ['smooth'],
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 }
 
