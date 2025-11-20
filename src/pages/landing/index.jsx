@@ -319,10 +319,10 @@ const Landing = () => {
                 </thead>
                 <tbody className="text-gray-700">
                   {[
-                    ["1", "2", "Christian Youth Empowerment Programs", "Small", "$10,000"],
-                    ["2", "2", "Christian Children Development in Christ", "Small", "$10,000"],
-                    ["3", "2", "Ministry Support (annual)", "Small", "$12,000"],
-                    ["4", "4", "Mission & Evangelism Outreach (per quarter)", "Micro", "$5,000"],
+                    ["1", "2", "Christian Youth Empowerment Programs", "Small", "₵10,000"],
+                    ["2", "2", "Christian Children Development in Christ", "Small", "₵10,000"],
+                    ["3", "2", "Ministry Support (annual)", "Small", "₵12,000"],
+                    ["4", "4", "Mission & Evangelism Outreach (per quarter)", "Micro", "₵5,000"],
                   ].map((r, i) => (
                     <motion.tr
                       key={i}
