@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Navbar from "../../components/navbar";
+import { Helmet } from "react-helmet-async";
 import Footer from "../../components/footer";
 import heroTwo from "../../assets/images/herotwo.jpg";
 
@@ -22,14 +23,19 @@ const New = () => {
   return (
     <div className="w-full overflow-x-hidden bg-white text-gray-800">
       <Navbar />
+      <Helmet>
+        <title>{post.title} | Pleroma Sycamore Foundation</title>
+        <meta name="description" content={post.excerpt} />
+      </Helmet>
+
 
       <div className="py-16 px-4 md:px-12 bg-gray-100 mt-20">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center m-4 md:m-16">
           {/* Text Section */}
           <div className="md:w-1/2 mb-8 md:mb-0">
-            <h4 className="text-[#1D6205] uppercase tracking-wide font-semibold mb-2">
+            <h1 className="text-[#1D6205] uppercase tracking-wide font-semibold mb-2">
               Raising Strategic Christian Leaders:
-            </h4>
+            </h1>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
               A Glimpse into the 2025 MDM Leadership Seminar
             </h2>

@@ -4,11 +4,21 @@ import { useEffect, useState } from "react";
 import { client } from "../../lib/sanity";
 import { PortableText } from "@portabletext/react";
 import Navbar from "../../components/navbar";
+import { Helmet } from "react-helmet-async";
+
 
 const SinglePost = () => {
   const { slug } = useParams();
   const [post, setPost] = useState(null);
   const [morePosts, setMorePosts] = useState([]);
+
+  const getExcerpt = (body) => {
+    const block = body?.find((b) => b._type === "block");
+    return block
+      ? block.children.map((c) => c.text).join(" ").slice(0, 160)
+      : "";
+  };
+
 
 
   useEffect(() => {
@@ -40,9 +50,19 @@ const SinglePost = () => {
   return (
     <>
       <Navbar />
+      <Helmet>
+        <title>
+          {post.title} | Pleroma Sycamore Foundation
+        </title>
+        <meta
+          name="description"
+          content={getExcerpt(post.body)}
+        />
+      </Helmet>
+
       <div className="bg-white min-h-screen mt-28 mb-28 pt-16 px-4 md:px-12">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl text-gray-800 sm:text-2xl md:text-2xl font-bold mb-2">{post.title}</h2>
+          <h1 className="text-4xl text-gray-800 sm:text-2xl md:text-2xl font-bold mb-2">{post.title}</h1>
           <p className="text-gray-500 text-sm mb-6">
             {new Date(post.publishedAt).toLocaleDateString()}
           </p>
@@ -59,7 +79,7 @@ const SinglePost = () => {
         </div>
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-20">
-          <h3 className="text-2xl font-bold text-gray-800 mb-6">Other posts you might like</h3>
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">Other posts you might like</h2>
           <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {morePosts.map((p) => (
               <div

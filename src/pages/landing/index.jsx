@@ -1,8 +1,9 @@
 import Navbar from "../../components/navbar";
+import { Helmet } from "react-helmet-async";
 import hero from "../../assets/images/hero.jpg";
 import mother from "../../assets/images/mother.jpg";
 import handthree from "../../assets/images/handthree.jpg";
-import { Eye, Goal } from "lucide-react";
+import { Eye, Goal, HeartHandshake, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
@@ -10,6 +11,10 @@ import RecentBlogs from "./components/recentBlogs.jsx";
 import Footer from "../../components/footer";
 
 function Landing() {
+  const DONATION_URL = import.meta.env.VITE_DONATION_URL;
+  const handleDonate = () => {
+    window.open(DONATION_URL, "_blank", "noopener,noreferrer");
+  };
   const [showScrollButton, setShowScrollButton] = useState(false);
   const oneTimePayment = [
     { amount: 20, link: "https://paystack.shop/pay/onetime20_pleroma-sycamore-foundation" },
@@ -23,7 +28,7 @@ function Landing() {
     { amount: 200, link: "PASTE_LINK_FOR_100_HERE" },
     { amount: 300, link: "PASTE_LINK_FOR_200_HERE" },
   ];
-  
+
   const annualPayment = [
     { amount: 400, link: "https://paystack.shop/pay/annual-donation400_pleroma-sycamore-foundation" },
     { amount: 600, link: "https://paystack.shop/pay/annual-donation_pleroma-sycamore-foundation" },
@@ -48,115 +53,55 @@ function Landing() {
     <>
       <Navbar />
 
+      <Helmet>
+        <title>Faith-Based NGO in Ghana | Pleroma Sycamore Foundation</title>
+        <meta
+          name="description"
+          content="Pleroma Sycamore Foundation is a faith-based NGO in Ghana dedicated to community development, youth empowerment, Christian outreach, and social transformation."
+        />
+      </Helmet>
+
+
       {/* Hero Section */}
       <div
-        className="relative w-full min-h-screen bg-cover bg-center pb-6 flex items-center justify-center text-center px-4 sm:px-6 md:px-12 pt-28 md:pt-32"
+        className="relative w-full min-h-screen bg-cover bg-center"
         style={{ backgroundImage: `url(${hero})` }}
       >
+        {/* Overlay */}
         <div className="absolute inset-0 bg-black/60"></div>
 
-        <motion.div
-          className="relative z-10 w-full max-w-6xl mx-auto mt-8 flex flex-col items-center gap-3"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
+        {/* Content */}
+        <div
+          className="
+      relative z-10
+      min-h-screen
+      flex items-center justify-center
+      px-4 sm:px-6 md:px-12
+      pt-[120px]
+    "
         >
-          <h3 className="text-white text-2xl sm:text-lg md:text-6xl font-bold leading-tight">
-            Empowered by Faith, Guided by Purpose
-          </h3>
+          <motion.div
+            className="w-full max-w-5xl text-center flex flex-col items-center gap-2"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: 'easeOut' }}
+          >
+            <h2 className="text-white text-2xl sm:text-3xl md:text-5xl font-bold leading-tight mt-2">
+              Empowered by Faith, Guided by Purpose
+            </h2>
 
-          <p className="text-white text-base sm:text-lg md:text-lg max-w-3xl font-light mt-2 sm:mt-4">
-            Partnering with the Holy Spirit to transform businesses, communities, and lives for God’s glory.
-          </p>
+            <p className="text-white/90 text-base sm:text-lg max-w-3xl font-light">
+              Partnering with the Holy Spirit to transform businesses, communities,
+              and lives for God’s glory.
+            </p>
 
-          {/* Donation Section */}
-          <div className="w-full mt-8 sm:mt-4">
-            <h3 className="text-white font-bold text-xl mb-6">Donate to Support</h3>
 
-            {/* Donation Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          </motion.div>
+        </div>
+      </div>
 
-              {/* One-Time Card */}
-              <div className="backdrop-blur-md bg-white/10 rounded-2xl p-6 flex flex-col gap-4 shadow-lg">
-                <a
-                  href="https://paystack.com/pay/monthly-link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white font-semibold py-3 transition"
-                >
-                  One Time
-                </a>
 
-                <div className="grid grid-cols-2 gap-3">
-                  {oneTimePayment.map((item, i) => (
-                    <a
-                      key={i}
-                      href={item.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="rounded-full bg-white text-black font-semibold py-3 hover:bg-[#1D6205] hover:text-white transition"
-                    >
-                      GHS {item.amount}
-                    </a>
-                  ))}
-                </div>
-              </div>
 
-              {/* Monthly Card */}
-              <div className="backdrop-blur-md bg-white/10 rounded-2xl p-6 flex flex-col gap-4 shadow-lg">
-                <a
-                  href="https://paystack.com/pay/monthly-link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white font-semibold py-3 transition"
-                >
-                  Monthly
-                </a>
-
-                <div className="grid grid-cols-2 gap-3">
-                  {monthlyAmounts.map((item, i) => (
-                    <a
-                      key={i}
-                      href={item.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="rounded-full bg-white text-black font-semibold py-3 hover:bg-[#1D6205] hover:text-white transition"
-                    >
-                      GHS {item.amount}
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-              {/* Annual Card */}
-              <div className="backdrop-blur-md bg-white/10 rounded-2xl p-6 flex flex-col gap-4 shadow-lg">
-                <a
-                  href="https://paystack.com/pay/monthly-link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white font-semibold py-3 transition"
-                >
-                  Annual
-                </a>
-
-                <div className="grid grid-cols-2 gap-3">
-                  {annualPayment.map((item, i) => (
-                    <a
-                      key={i}
-                      href={item.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="rounded-full bg-white text-black font-semibold py-3 hover:bg-[#1D6205] hover:text-white transition"
-                    >
-                      GHS {item.amount}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.div >
-      </div >
 
 
       {/* About Section */}
@@ -175,17 +120,14 @@ function Landing() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h5 className="text-gray-800 font-bold text-sm md:text-lg uppercase tracking-wide">
+            <p className="text-gray-800 font-bold text-sm md:text-lg uppercase tracking-wide">
               Welcome to
-            </h5>
+            </p>
             <h2 className="text- font-bold text-3xl sm:text-4xl lg:text-5xl leading-snug mb-4">
               Pleroma Sycamore Foundation (PSF)
             </h2>
             <p className="text-gray-600 mt-4 md:mt-6 leading-relaxed text-base sm:text-lg">
-              PSF is a Christian resource organization dedicated to empowering individuals
-              and communities under the guidance of the Holy Spirit. Together with our
-              Christian partners, we work to enforce God’s will on earth, creating a world
-              filled with love and empowerment.
+              PSF is a Christian resource organization committed to empowering individuals and communities under the guidance of the Holy Spirit. Through partnership, prayer, and service, we seek to reflect God’s love and bring transformation to lives.
             </p>
             <Link to="/who-we-are">
               <motion.button
@@ -207,7 +149,7 @@ function Landing() {
           >
             <motion.img
               src={handthree}
-              alt="Pleroma foundation illustration"
+              alt="Community empowerment initiative by Pleroma Sycamore Foundation in Ghana"
               className="rounded-2xl w-[85%] sm:w-[90%] md:w-[95%] lg:w-full max-w-lg md:max-w-xl object-cover shadow-2xl"
               whileHover={{
                 scale: 1.03,
@@ -264,6 +206,8 @@ function Landing() {
         </div>
       </motion.div >
 
+
+
       {/* Scroll to Top Button */}
       {
         showScrollButton && (
@@ -281,6 +225,79 @@ function Landing() {
       }
 
       <RecentBlogs />
+
+      <section className="relative py-20 sm:py-28 bg-gray-50 overflow-hidden">
+
+        {/* Soft background glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(29,98,5,0.08),transparent_60%)] pointer-events-none" />
+
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+          {/* Left content */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+          >
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-6 leading-tight">
+              Partner With Us in Advancing God’s Work
+            </h2>
+
+            <p className="text-gray-600 text-base sm:text-lg leading-relaxed mb-6 max-w-xl">
+              Your generosity supports a trusted Christian NGO in Ghana,
+              helping us empower youth, care for vulnerable groups, and
+              strengthen communities through faith-driven programs.Your generosity helps us remain agile and faithful in serving
+              communities, empowering the young, caring for the aged, and
+              advancing God’s mission through love and service.
+            </p>
+
+            <div className="space-y-3 text-gray-700 text-sm sm:text-base">
+              <div className="flex items-center gap-3">
+                <HeartHandshake className="text-[#1D6205]" size={20} />
+                <span>Faith-driven programs with lasting impact</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <ShieldCheck className="text-[#1D6205]" size={20} />
+                <span>Secure giving through our trusted payment partner</span>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right donation card */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+            className="bg-white rounded-3xl shadow-xl p-8 sm:p-10 text-center"
+          >
+            <h3 className="text-2xl font-semibold text-gray-800 mb-4">
+              Support Our Mission
+            </h3>
+
+            <p className="text-gray-600 text-sm sm:text-base mb-6">
+              Every gift, no matter the size, helps transform lives
+              and strengthen Christian communities.
+            </p>
+
+            <motion.button
+              onClick={handleDonate}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-full bg-[#1D6205] hover:bg-[#155304] text-white font-semibold py-4 rounded-full shadow-md hover:shadow-lg transition-all"
+            >
+              Donate
+            </motion.button>
+
+            <p className="text-xs text-gray-500 mt-4">
+              You’ll be redirected to our secure payment partner.
+              We do not store card or mobile money details.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
       <Footer />
     </>
   );

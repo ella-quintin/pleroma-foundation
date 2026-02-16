@@ -238,7 +238,7 @@ const Navbar = () => {
                       Apply for a Grant
                     </Link>
                     <Link
-                      to="/"
+                      to="/donate"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-[#1D6205]/10 hover:text-[#1D6205]"
                       onClick={() => {
                         setGrantsOpen(false);

@@ -1,6 +1,7 @@
 import { MapPin, Phone, Mail } from 'lucide-react';
 import contact from "../../assets/images/contact.jpg";
 import Navbar from '../../components/navbar';
+import { Helmet } from "react-helmet-async";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Footer from '../../components/footer';
@@ -33,8 +34,16 @@ const Contact = () => {
   return (
     <>
       <Navbar />
+      <Helmet>
+        <title>Contact Us | Pleroma Sycamore Foundation – Faith-Based NGO in Ghana</title>
+        <meta
+          name="description"
+          content="Contact Pleroma Sycamore Foundation, a faith-based NGO in Ghana. Reach out for partnerships, support, prayer, or community initiatives."
+        />
+      </Helmet>
+
       <motion.div
-        className="bg-gray-50 mt-20 overflow-x-hidden"  
+        className="bg-gray-50 mt-20 overflow-x-hidden"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
@@ -48,14 +57,14 @@ const Contact = () => {
           transition={{ duration: 0.8 }}
         >
           <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-            <motion.h3
+            <motion.h1
               className="text-white text-4xl font-bold"
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.6 }}
             >
-              Contact
-            </motion.h3>
+              Contact Pleroma Sycamore Foundation
+            </motion.h1>
           </div>
         </motion.section>
 
@@ -74,9 +83,14 @@ const Contact = () => {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-3xl font-bold text-[#1D6205] mb-6">
+              <h5 className="text-[#1D6205] uppercase tracking-wide font-semibold mb-2">
+                Contact Information
+              </h5>
+
+              <h2 className="text-3xl font-bold text-gray-800 mb-6">
                 Get In Touch With Us
-              </h3>
+              </h2>
+
               <p className="text-gray-700 leading-relaxed mb-6">
                 We’re here to answer your questions, discuss partnerships, or pray with you. Let’s connect and build a world of love and empowerment.
               </p>
@@ -94,17 +108,17 @@ const Contact = () => {
                   </p>
                 </li>
                 <li className="flex items-center">
-                <Mail className="text-[#1D6205] w-6 h-6 mr-3" />
-                <p className="text-sm sm:text-base text-black">
-                  <span className="font-bold text-black">Email:</span>{" "}
-                  <a
-                    href="mailto:info@pleroma-scycamore.org"
-                    className="hover:underline text-black"
-                  >
-                    info@pleroma-sycamore.org
-                  </a>
-                </p>
-              </li>
+                  <Mail className="text-[#1D6205] w-6 h-6 mr-3" />
+                  <p className="text-sm sm:text-base text-black">
+                    <span className="font-bold text-black">Email:</span>{" "}
+                    <a
+                      href="mailto:info@pleroma-scycamore.org"
+                      className="hover:underline text-black"
+                    >
+                      info@pleroma-sycamore.org
+                    </a>
+                  </p>
+                </li>
               </ul>
             </motion.div>
 

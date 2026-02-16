@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { client } from "../../lib/sanity";
 import { Link } from "react-router-dom";
 import Navbar from "../../components/navbar";
+import { Helmet } from "react-helmet-async";
 import Footer from "../../components/footer";
 import media from "../../assets/images/gallery.jpg";
 
@@ -21,6 +22,16 @@ const GalleryAlbums = () => {
   return (
     <>
       <Navbar />
+      <Helmet>
+        <title>
+          Gallery | Pleroma Sycamore Foundation – Faith-Based NGO in Ghana
+        </title>
+        <meta
+          name="description"
+          content="View photos from programs, outreach activities, and community initiatives by Pleroma Sycamore Foundation, a faith-based NGO in Ghana."
+        />
+      </Helmet>
+
       <div className=" bg-gray-50 min-h-screen">
         <div
           className="relative w-full h-64 bg-cover bg-center overflow-hidden mt-20"
@@ -28,11 +39,11 @@ const GalleryAlbums = () => {
         >
           <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center">
 
-            <div
+            <h1
               className="text-white text-2xl sm:text-3xl lg:text-4xl font-bold text-center"
             >
               Our Gallery
-            </div>
+            </h1>
             <p className="text-lg text-white font-light mt-2 text-center">View images from our recent programs</p>
 
           </div>

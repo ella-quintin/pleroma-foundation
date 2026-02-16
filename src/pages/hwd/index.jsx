@@ -1,4 +1,5 @@
 import Navbar from "../../components/navbar";
+import { Helmet } from "react-helmet-async";
 import { Briefcase, Heart, Users, Book, Video, PersonStanding, Baby, BookOpen, Soup } from "lucide-react";
 import boy from "../../assets/boy.jpg";
 import man from "../../assets/man.jpg";
@@ -117,6 +118,14 @@ const HowWeWork = () => {
   return (
     <>
       <Navbar />
+      <Helmet>
+        <title>What We Do | Faith-Based NGO Programs in Ghana – Pleroma Sycamore Foundation</title>
+        <meta
+          name="description"
+          content="Discover how Pleroma Sycamore Foundation, a faith-based NGO in Ghana, delivers community development, youth empowerment, Christian outreach, leadership training, and social support programs."
+        />
+      </Helmet>
+
 
       {/* Header Section */}
       <motion.div
@@ -127,14 +136,14 @@ const HowWeWork = () => {
         transition={{ duration: 0.8 }}
       >
         <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center">
-          <motion.h3
+          <motion.h1
             className="text-white text-2xl sm:text-3xl lg:text-4xl font-bold text-center"
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6 }}
           >
             How We Work
-          </motion.h3>
+          </motion.h1>
         </div>
       </motion.div>
 
@@ -155,7 +164,12 @@ const HowWeWork = () => {
               Guided by the Holy Spirit
             </h2>
             <p className="text-gray-600 text-base sm:text-lg mb-6">
-              We believe in partnerships that are spirit-led, creating programs and initiatives that bring transformation.
+              <p className="text-gray-600 text-base sm:text-lg mb-6">
+                As a faith-based nonprofit organization in Ghana, we believe in spirit-led
+                partnerships that result in impactful programs addressing spiritual,
+                social, and economic needs within communities.
+              </p>
+
             </p>
             <ul className="list-disc pl-5 space-y-2 text-gray-600 text-sm sm:text-base">
               <li>Supporting Christian businesses through entrepreneurship development.</li>
@@ -174,7 +188,7 @@ const HowWeWork = () => {
           >
             <img
               src={hands}
-              alt="About Us"
+              alt="About Pleroma Sycamore Foundation"
               className="rounded-2xl shadow-lg w-full h-full sm:w-96 sm:h-96 object-cover"
             />
           </motion.div>

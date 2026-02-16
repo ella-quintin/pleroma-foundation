@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { client } from "../../lib/sanity";
 import { Link, NavLink } from "react-router-dom";
 import Navbar from "../../components/navbar";
+import { Helmet } from "react-helmet-async";
 import blog from "../../assets/images/blog.jpg";
 import Footer from "../../components/footer";
 
@@ -28,22 +29,32 @@ const BlogList = () => {
   return (
     <>
       <Navbar />
+      <Helmet>
+        <title>
+          News & Updates | Pleroma Sycamore Foundation – Faith-Based NGO in Ghana
+        </title>
+        <meta
+          name="description"
+          content="Read news, stories, and impact updates from Pleroma Sycamore Foundation, a faith-based NGO in Ghana focused on community development, leadership, and Christian outreach."
+        />
+      </Helmet>
+
       <div className="bg-gray-50 min-h-screen">
-         <div
-                className="relative w-full h-64 bg-cover bg-center overflow-hidden mt-20"
-                style={{ backgroundImage: `url(${blog})` }}
-              >
-                <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center">
-                  
-                  <div
-                    className="text-white text-2xl sm:text-3xl lg:text-4xl font-bold text-center"
-                  >
-                    What's New?
-                  </div>
-                  <p className="text-lg text-white font-light mt-2 text-center">Read our latest stories and updates here</p>
-                  
-                </div>
-              </div>
+        <div
+          className="relative w-full h-64 bg-cover bg-center overflow-hidden mt-20"
+          style={{ backgroundImage: `url(${blog})` }}
+        >
+          <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center">
+
+            <h1
+              className="text-white text-2xl sm:text-3xl lg:text-4xl font-bold text-center"
+            >
+              What's New?
+            </h1>
+            <p className="text-lg text-white font-light mt-2 text-center">Read our latest stories and updates here</p>
+
+          </div>
+        </div>
 
         <div className="grid mt-24 mb-24 px-4 sm:px-6 lg:px-20 gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (
@@ -65,8 +76,8 @@ const BlogList = () => {
             </Link>
           ))}
         </div>
-        </div>
-        <Footer />
+      </div>
+      <Footer />
     </>
   );
 };

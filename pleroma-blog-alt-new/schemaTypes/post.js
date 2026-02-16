@@ -18,6 +18,13 @@ export default {
       },
     },
     {
+      name: 'excerpt',
+      title: 'SEO Excerpt / Summary',
+      type: 'text',
+      rows: 3,
+      description: 'Short summary used for search engines and previews (150–160 characters)',
+    },
+    {
       name: 'mainImage',
       title: 'Main Image',
       type: 'image',
