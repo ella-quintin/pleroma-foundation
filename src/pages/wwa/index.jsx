@@ -9,12 +9,15 @@ import adokarle from "../../assets/images/adokarle.jpeg";
 import vera from "../../assets/images/vera.jpg";
 import kojo from "../../assets/images/kojo.png";
 import abigail from "../../assets/images/abigail.jpeg";
+import joseph from "../../assets/images/joseph.jpg";
+import dorothy from "../../assets/images/dorothy.jpeg";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import Footer from "../../components/footer";
 
 const WhoWeAre = () => {
   const [showScrollButton, setShowScrollButton] = useState(false);
+  const [openModalId, setOpenModalId] = useState(null);
 
   // Handle scroll events to toggle button visibility
   useEffect(() => {
@@ -30,6 +33,30 @@ const WhoWeAre = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Handle hash navigation on mount and hash changes
+  useEffect(() => {
+    const scrollToHash = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        // Small delay to ensure page is fully rendered
+        setTimeout(() => {
+          const element = document.querySelector(hash);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 100);
+      }
+    };
+
+    // Scroll on mount
+    scrollToHash();
+
+    // Listen for hash changes
+    window.addEventListener('hashchange', scrollToHash);
+
+    return () => window.removeEventListener('hashchange', scrollToHash);
+  }, []);
+
   // Scroll to top logic
   const scrollToTop = () => {
     window.scrollTo({
@@ -40,37 +67,9 @@ const WhoWeAre = () => {
 
   // Board members data - Update with your actual data
   const boardMembers = [
+
     {
       id: 1,
-      name: "Eric Akumiah",
-      position: "Founder & President",
-      photo: eric,
-      bio: "Eric Akumiah is the Founder and President of the Foundation, called to serve at the intersection of faith, leadership, and societal transformation. With over two decades of experience in digital development, governance, and capacity building across Africa and beyond, Eric brings to the Board a deep commitment to empowering young people to discover purpose, develop skills, and become agents of positive change in their communities.",
-      fullProfile: `Eric Akumiah is the Founder and President of the Foundation, called to serve at the intersection of faith, leadership, and societal transformation. With over two decades of experience in digital development, governance, and capacity building across Africa and beyond, Eric brings to the Board a deep commitment to empowering young people to discover purpose, develop skills, and become agents of positive change in their communities.
-A Chevening Scholar, Eric holds a Master’s degree in Communications Management from Strathclyde Business School, University of Strathclyde, Glasgow. His professional journey spans ICT infrastructure development, digital transformation, and cybersecurity leadership, including contributions to national-level initiatives that have strengthened institutional capacity and public-sector service delivery in Ghana and across the African continent .
-Eric’s leadership philosophy is firmly grounded in Christian values. He believes that meaningful development must address both spiritual and practical needs, and that youth empowerment is central to fulfilling God’s mandate for stewardship, justice, and service on earth. Through mentorship, skills development, and values-based leadership, he is passionate about nurturing a new generation of young leaders who are ethically grounded, socially responsible, and driven by faith-inspired purpose.
-Throughout his career, Eric has demonstrated a strong commitment to institution-building, collaboration, and service. He has worked extensively with governments, regional bodies, and international partners to design sustainable systems, build human capacity, and promote inclusive growth. These experiences inform his vision for the Foundation as a platform for transforming lives—particularly those of young people—through faith-based programs, education, leadership development, and community impact.
-As Founder and President, Eric provides strategic leadership and spiritual direction to the Board, ensuring that the Foundation remains mission-driven, accountable, and aligned with its calling to serve God by empowering people, strengthening communities, and raising leaders for today and tomorrow`
-
-    },
-
-    {
-      id: 2,
-      name: "Vera Korlekuor Akumiah",
-      position: "Board Secretary",
-      photo: vera,
-      bio: "Vera Korlekuor Akumiah is a communications and leadership professional with over two decades of experience serving in higher education, international development, and faith-inspired organisations.",
-      fullProfile: `Vera Korlekuor Akumiah is a communications and leadership professional with over two decades of experience serving in higher education, international development, and faith-inspired organisations. She is deeply committed to advancing faith-based leadership, community transformation, and mentorship, particularly among young people and emerging leaders.
-Vera currently serves as a Senior Assistant Registrar at the University of Professional Studies, Accra (UPSA), where she contributes to institutional governance, administrative leadership, and policy implementation, while also lecturing in Public Relations at the undergraduate level. Her professional journey has included service with respected organisations such as Plan International Ghana, the African Women’s Development Fund, the Association of African Universities, Right To Play Ghana, and Save the Children UK, where she supported strategic communication, programme development, and stakeholder engagement. 
-She holds an MPhil in Leadership from UPSA and is an Associate Member of the Institute of Public Relations, Ghana. Vera is passionate about nurturing values-driven leadership and strengthening organisations that promote holistic community development. She is also an author, and her young adult novel Ebony Girl received recognition under the CODE Burt Award for African Young Adult Literature.
-Through her work with the Pleroma Sycamore Foundation, Vera is dedicated to supporting initiatives that strengthen faith-based institutions, empowering children and youth, and raise principled leaders who will positively impact society.
-Vera is a children's Sunday School teacher and is passionate about instilling godly principles in children while they are still impressionable and young.  She also organises Young Writers clubs for children in her community unearth writing talents in children and young adults.
-Her hobbies include writing, gardening, cooking and exploring new healthy recipes to keep fit.
-`
-    },
-
-    {
-      id: 3,
       name: "Mrs. Adokarley Okpoti-Paulo ",
       position: "Board Chair",
       photo: adokarle,
@@ -86,17 +85,15 @@ In 2021 she worn the Honoré Award of the Women’s Choice Awards Africa as the 
 In September 2022 she worn the August award of National Finance Personality of the year at the National Business Honours 2022. 
 Adokarley has gone through many leadership trainings and Conferences including the recent Global Leadership Conference in Chicago. She brings this on board in her leadership skills.
 She has excellent human relations and the capacity to adjust quickly to new developments and environments. She has a high sense of responsibility and is trustworthiness.
-She is married to Reverend Eric Okpoti-Paulo with four handsome young men, two lovely daughters in laws and three Lovely grandchildren. Adokarley loves singing, cooking, working smart, and is in the ministry of Helps, Marriage Counselling and Administration. Adokarley Loves mentoring, impacting and improving lives.
-`
+She is married to Reverend Eric Okpoti-Paulo with four handsome young men, two lovely daughters in laws and three Lovely grandchildren. Adokarley loves singing, cooking, working smart, and is in the ministry of Helps, Marriage Counselling and Administration. Adokarley Loves mentoring, impacting and improving lives.`
     },
 
-
     {
-      id: 4,
+      id: 2,
       name: "Francis Kojo Bedi",
       position: "Member",
       photo: kojo,
-      bio: "Kojo Bedi serves as a Board Member of the Pleroma Sycamore Foundation, bringing a deep passion for evangelism, discipleship, and partnership development in Christian ministry.",
+      bio: "Francis Kojo Bedi serves as a Board Member of the Pleroma Sycamore Foundation, bringing a deep passion for evangelism, discipleship, and partnership development in Christian ministry.",
       fullProfile: `Francis Kojo Bedi serves as a Board Member of the Pleroma Sycamore Foundation, bringing a deep passion for evangelism, discipleship, and partnership development in Christian ministry. With over two decades of dedicated missionary service, Francis offers the Board invaluable spiritual insight, leadership experience, and a strong commitment to advancing faith-based transformation in communities.
 Francis is a full-time missionary with The Great Commission Movement of Ghana, affiliated with Campus Crusade for Christ International, where he has faithfully served since 1995. He currently serves as Director of Partner Development and as the Jesus Film Projects Representative. Through these roles, he equips missionaries to build sustainable ministry partnerships and leads initiatives to translate and deploy the Jesus Film into major Ghanaian languages as a powerful evangelism and discipleship tool.
 As a member of the PSF Board, Francis contributes his extensive experience in ministry development, partnership building, and faith-based outreach strategies. He is particularly passionate about initiatives that strengthen Christian leadership, support community transformation, and expand opportunities for individuals to encounter and grow in their faith.
@@ -104,20 +101,73 @@ Francis is married to Clara Edem Bedi, also a full-time missionary, and together
     },
 
     {
-      id: 5,
+      id: 3,
       name: "Abigail Burgesson",
       position: "Member",
       photo: abigail,
       bio: "Abigail Burgesson is an international development practitioner and women's rights and social justice advocate with 28 years of experience promoting social justice and transformative change across Africa and globally through philanthropy.",
       fullProfile: `Abigail Burgesson is an international development practitioner and women's rights and social justice advocate with 28 years of experience promoting social justice and transformative change across Africa and globally through philanthropy. As founder and Principal Consultant of Fern Resource Alternatives, she specialises in resource mobilisation, strategic partnerships, institutional strengthening, and transformative leadership for non-profit organisations.
 Her distinguished career includes nearly two decades in senior management at the African Women's Development Fund (AWDF), leading Partnerships and Resource Mobilization from inception. She founded 'The Bridge', a mentorship program empowering young women toward financial independence through entrepreneurship and job readiness, and advocates for technical and vocational education as a solution to youth unemployment across Africa.
-Abigail holds a BA in English from the University of Ghana and an MA in International Relations from Boston University's European Program (UK). 
-She completed International Negotiations training at the Centre for Applied Studies in International Negotiations, Geneva, Switzerland and specialised training in Resource Mobilization and Alternative Dispute Resolution.
+Abigail holds a BA in English from the University of Ghana and an MA in International Relations from Boston University's European Program (UK). She completed International Negotiations training at the Centre for Applied Studies in International Negotiations, Geneva, Switzerland and specialised training in Resource Mobilization and Alternative Dispute Resolution.
 She currently serves on multiple governance boards: the Emerging Public Leader (EPL) Global Board (Washington, DC and EPL Ghana); Strategic Advisor for AfriWomen's Network (Global); Star-Ghana Foundation (Finance and Fundraising Committee); and Chair of The McCarthy Hill School (Accra, Ghana).
 A progressive woman of Christian faith, Abigail uniquely bridges social justice, feminism, and spiritual conviction. Her work courageously addresses women's rights and injustice within religious spaces, challenging cultural practices, norms and beliefs that perpetuate inequality. This positions her to champion PSF's faith-driven mission to empower God's people and to advance justice and love through the Holy Spirit.
 Abigail brings proven expertise in resource mobilization, partnership development, and institutional strengthening, along with extensive global board governance experience, to drive PSF's growth and impact. Her commitment to faith-based transformation, youth empowerment, and community strengthening aligns seamlessly with PSF's vision.
 Married and living in Accra, Ghana, with her husband and three children, Abigail finds inspiration through family, worship music, sound, and transformative biblical teachings. She enjoys creating Afrocentric interior décor and hosting gatherings for friends and family.`
     },
+
+    {
+      id: 4,
+      name: "Joseph Odoi",
+      position: "Member",
+      photo: joseph,
+      bio: "Seasoned ICT and telecommunications executive with close to three decades of senior leadership experience across engineering, managed services, and business development in Ghana and international markets.",
+      fullProfile: `Seasoned ICT and telecommunications executive with close to three decades of senior leadership experience across engineering, managed services, and business development in Ghana and international markets. Grounded in Christian values, he brings strategic insight, governance discipline, and a strong commitment to youth empowerment to foundation leadership. He is passionate about mentoring young people, strengthening institutional capacity, and supporting faith-driven initiatives that equip the next generation with character, competence, and a clear sense of God-given purpose.`
+    },
+
+    {
+      id: 5,
+      name: "Dorothy Otoo",
+      position: "Member",
+      photo: dorothy,
+      bio: "Dorothy Otoo is an accomplished School Administrator with over two decades of experience in educational leadership and child development. She holds a Postgraduate Diploma in Communication and a strong academic foundation in the Social Sciences, blending scholarly insight with practical leadership expertise.",
+      fullProfile: `Dorothy Otoo is an accomplished School Administrator with over two decades of experience in educational leadership and child development. She holds a Postgraduate Diploma in Communication and a strong academic foundation in the Social Sciences, blending scholarly insight with practical leadership expertise.
+Throughout her career, Dorothy has successfully led school operations, supervised multidisciplinary teams, and strengthened institutional systems to improve pupil outcomes. Her leadership approach is grounded in structure, accountability, and the creation of safe, nurturing learning environments where children can thrive academically, socially, and emotionally.
+Beyond her administrative leadership, Dorothy brings considerable expertise in stakeholder engagement, strategic communication, writing and editing, and media relations. Her ability to articulate vision clearly, foster strong relationships with parents and partners, and enhance institutional credibility makes her an invaluable contributor to board governance and external relations.
+Dorothy provides practical insight into policies and programmes that directly impact children and youth development, drawing from her extensive experience in education and institutional leadership. She brings strong governance capacity, supported by her experience in managing organisational systems, teams, and operational structures. Her strength in strategic communication enables her to contribute effectively to messaging, stakeholder engagement, and public representation, while her long-standing passion for youth empowerment reflects her commitment to equipping children and young people to reach their full potential. Her leadership is firmly rooted in values-based and faith-driven service, which supports transformational and purpose-centred impact.
+Dorothy is deeply passionate about nurturing and empowering the next generation. With over 20 years of hands-on experience working with children, she remains committed to holistic development — intellectual, emotional, and spiritual. Her personal values strongly align with the mission of the Pleroma Sycamore Foundation, particularly its dedication to spiritual growth and character formation in young people.
+Dorothy Otoo brings wisdom, experience, and a nurturing yet strategic leadership perspective to the Pleroma Sycamore Foundation Board. Her blend of administrative strength, communication excellence, and genuine passion for child development positions her to contribute meaningfully to the Foundation’s vision of raising spiritually grounded and empowered young leaders.`
+    },
+
+    {
+      id: 6,
+      name: "Vera Korlekuor Akumiah",
+      position: "Board Secretary",
+      photo: vera,
+      bio: "Vera Korlekuor Akumiah is a communications and leadership professional with over two decades of experience serving in higher education, international development, and faith-inspired organisations.",
+      fullProfile: `Vera Korlekuor Akumiah is a communications and leadership professional with over two decades of experience serving in higher education, international development, and faith-inspired organisations. She is deeply committed to advancing faith-based leadership, community transformation, and mentorship, particularly among young people and emerging leaders.
+Vera currently serves as a Senior Assistant Registrar at the University of Professional Studies, Accra (UPSA), where she contributes to institutional governance, administrative leadership, and policy implementation, while also lecturing in Public Relations at the undergraduate level. Her professional journey has included service with respected organisations such as Plan International Ghana, the African Women’s Development Fund, the Association of African Universities, Right To Play Ghana, and Save the Children UK, where she supported strategic communication, programme development, and stakeholder engagement. 
+She holds an MPhil in Leadership from UPSA and is an Associate Member of the Institute of Public Relations, Ghana. Vera is passionate about nurturing values-driven leadership and strengthening organisations that promote holistic community development. She is also an author, and her young adult novel Ebony Girl received recognition under the CODE Burt Award for African Young Adult Literature.
+Through her work with the Pleroma Sycamore Foundation, Vera is dedicated to supporting initiatives that strengthen faith-based institutions, empowering children and youth, and raise principled leaders who will positively impact society.
+Vera is a children's Sunday School teacher and is passionate about instilling godly principles in children while they are still impressionable and young.  She also organises Young Writers clubs for children in her community unearth writing talents in children and young adults.
+Her hobbies include writing, gardening, cooking and exploring new healthy recipes to keep fit.`
+    },
+
+    {
+      id: 7,
+      name: "Eric Akumiah",
+      position: "Founder & President",
+      photo: eric,
+      bio: "Eric Akumiah is the Founder and President of the Foundation, called to serve at the intersection of faith, leadership, and societal transformation. With over two decades of experience in digital development, governance, and capacity building across Africa and beyond, Eric brings to the Board a deep commitment to empowering young people to discover purpose, develop skills, and become agents of positive change in their communities.",
+      fullProfile: `EEric Akumiah is the Founder and President of the Foundation, called to serve at the intersection of faith, leadership, and societal transformation. With over two decades of experience in digital development, governance, and capacity building across Africa and beyond, Eric brings to the Board a deep commitment to empowering young people to discover purpose, develop skills, and become agents of positive change in their communities.
+A Chevening Scholar, Eric holds a Master’s degree in Communications Management from Strathclyde Business School, University of Strathclyde, Glasgow. His professional journey spans ICT infrastructure development, digital transformation, and cybersecurity leadership, including contributions to national-level initiatives that have strengthened institutional capacity and public-sector service delivery in Ghana and across the African continent .
+Eric’s leadership philosophy is firmly grounded in Christian values. He believes that meaningful development must address both spiritual and practical needs, and that youth empowerment is central to fulfilling God’s mandate for stewardship, justice, and service on earth. Through mentorship, skills development, and values-based leadership, he is passionate about nurturing a new generation of young leaders who are ethically grounded, socially responsible, and driven by faith-inspired purpose.
+Throughout his career, Eric has demonstrated a strong commitment to institution-building, collaboration, and service. He has worked extensively with governments, regional bodies, and international partners to design sustainable systems, build human capacity, and promote inclusive growth. These experiences inform his vision for the Foundation as a platform for transforming lives—particularly those of young people—through faith-based programs, education, leadership development, and community impact.
+As Founder and President, Eric provides strategic leadership and spiritual direction to the Board, ensuring that the Foundation remains mission-driven, accountable, and aligned with its calling to serve God by empowering people, strengthening communities, and raising leaders for today and tomorrow.`
+
+    },
+
+
+
 
   ];
 
@@ -239,7 +289,7 @@ Married and living in Accra, Ghana, with her husband and three children, Abigail
         </motion.div>
 
         {/* Board Members Section */}
-        <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
+        <section id="board" className="py-20 bg-gradient-to-b from-gray-50 to-white">
           <div className="container mx-auto px-6 lg:px-8 max-w-7xl">
             {/* Section Header */}
             <motion.div
@@ -278,12 +328,10 @@ Married and living in Accra, Ghana, with her husband and three children, Abigail
                 >
                   <div
                     className="group relative bg-white rounded-xl shadow-lg overflow-hidden cursor-pointer transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
-                    onClick={() => {
-                      document.getElementById(`modal-${member.id}`).classList.remove('hidden');
-                    }}
+                    onClick={() => setOpenModalId(member.id)}
                     onKeyPress={(e) => {
                       if (e.key === 'Enter') {
-                        document.getElementById(`modal-${member.id}`).classList.remove('hidden');
+                        setOpenModalId(member.id);
                       }
                     }}
                     role="button"
@@ -342,90 +390,90 @@ Married and living in Accra, Ghana, with her husband and three children, Abigail
                   </div>
 
                   {/* Modal for Full Profile */}
-                  <div
-                    id={`modal-${member.id}`}
-                    className="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
-                    onClick={(e) => {
-                      if (e.target.id === `modal-${member.id}`) {
-                        e.target.classList.add('hidden');
-                      }
-                    }}
-                    role="dialog"
-                    aria-modal="true"
-                    aria-labelledby={`modal-title-${member.id}`}
-                  >
+                  {openModalId === member.id && (
                     <div
-                      className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative"
-                      onClick={(e) => e.stopPropagation()}
+                      id={`modal-${member.id}`}
+                      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+                      onClick={(e) => {
+                        if (e.target.id === `modal-${member.id}`) {
+                          setOpenModalId(null);
+                        }
+                      }}
+                      role="dialog"
+                      aria-modal="true"
+                      aria-labelledby={`modal-title-${member.id}`}
                     >
-                      {/* Close Button */}
-                      <button
-                        onClick={() => {
-                          document.getElementById(`modal-${member.id}`).classList.add('hidden');
-                        }}
-                        className="absolute top-4 right-4 z-10 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100 transition-colors"
-                        aria-label="Close profile"
+                      <div
+                        className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative"
+                        onClick={(e) => e.stopPropagation()}
                       >
-                        <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                      </button>
+                        {/* Close Button */}
+                        <button
+                          onClick={() => setOpenModalId(null)}
+                          className="absolute top-4 right-4 z-10 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100 transition-colors"
+                          aria-label="Close profile"
+                        >
+                          <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        </button>
 
-                      {/* Modal Content */}
-                      <div className="grid md:grid-cols-5 gap-6 p-8">
-                        {/* Profile Image */}
-                        <div className="md:col-span-2">
-                          <div className="sticky top-8">
-                            <div className="relative rounded-xl overflow-hidden shadow-lg aspect-[3/4] bg-gray-200">
-                              <img
-                                src={member.photo}
-                                alt={member.name}
-                                className="w-full h-full object-cover"
-                                onError={(e) => {
-                                  e.target.style.display = 'none';
-                                  e.target.nextElementSibling.style.display = 'flex';
-                                }}
-                              />
-                              <div className="hidden absolute inset-0 items-center justify-center bg-gray-300">
-                                <span className="text-gray-500 text-6xl">👤</span>
+                        {/* Modal Content */}
+                        <div className="grid md:grid-cols-5 gap-6 p-8">
+                          {/* Profile Image */}
+                          <div className="md:col-span-2">
+                            <div className="sticky top-8">
+                              <div className="relative rounded-xl overflow-hidden shadow-lg aspect-[3/4] bg-gray-200">
+                                <img
+                                  src={member.photo}
+                                  alt={member.name}
+                                  className="w-full h-full object-cover"
+                                  onError={(e) => {
+                                    e.target.style.display = 'none';
+                                    e.target.nextElementSibling.style.display = 'flex';
+                                  }}
+                                />
+                                <div className="hidden absolute inset-0 items-center justify-center bg-gray-300">
+                                  <span className="text-gray-500 text-6xl">👤</span>
+                                </div>
+                              </div>
+                              <div className="mt-6 text-center">
+                                <h2 id={`modal-title-${member.id}`} className="text-2xl font-bold text-gray-800 mb-2">
+                                  {member.name}
+                                </h2>
+                                <p className="text-[#088E31] font-semibold text-lg">
+                                  {member.position}
+                                </p>
                               </div>
                             </div>
-                            <div className="mt-6 text-center">
-                              <h2 id={`modal-title-${member.id}`} className="text-2xl font-bold text-gray-800 mb-2">
-                                {member.name}
-                              </h2>
-                              <p className="text-[#088E31] font-semibold text-lg">
-                                {member.position}
-                              </p>
-                            </div>
                           </div>
-                        </div>
 
-                        {/* Profile Details */}
-                        <div className="md:col-span-3">
-                          <div className="prose prose-lg max-w-none">
-                            <h3 className="text-xl font-bold text-gray-800 mb-4 pb-3 border-b-2 border-[#088E31]">
-                              Profile
-                            </h3>
-                            <div className="text-gray-700 leading-relaxed">
-                              {member.fullProfile
-                                .split(/\n+/)
-                                .filter(p => p.trim() !== "")
-                                .map((paragraph, index) => (
-                                  <p
-                                    key={index}
-                                    className="mb-4 text-sm sm:text-base leading-7"
-                                  >
-                                    {paragraph}
-                                  </p>
-                                ))}
+                          {/* Profile Details */}
+                          <div className="md:col-span-3">
+                            <div className="prose prose-lg max-w-none">
+                              <h3 className="text-xl font-bold text-gray-800 mb-4 pb-3 border-b-2 border-[#088E31]">
+                                Profile
+                              </h3>
+                              <div className="text-gray-700 leading-relaxed">
+                                {member.fullProfile
+                                  .split(/\n+/)
+                                  .filter(p => p.trim() !== "")
+                                  .map((paragraph, index) => (
+                                    <p
+                                      key={index}
+                                      className="mb-4 text-sm sm:text-base leading-7"
+                                    >
+                                      {paragraph}
+                                    </p>
+                                  ))}
+                              </div>
+
                             </div>
-
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  )}
                 </motion.div>
               ))}
             </div>

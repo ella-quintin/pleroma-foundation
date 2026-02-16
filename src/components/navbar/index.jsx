@@ -101,17 +101,15 @@ const Navbar = () => {
         {/* Menu */}
         <div
           ref={menuRef}
-          className={`${
-            isMenuOpen ? "flex" : "hidden"
-          } flex-col md:flex md:flex-row md:items-center absolute md:static top-full right-0 bg-white md:bg-transparent shadow-lg md:shadow-none rounded-lg md:rounded-none w-4/5 md:w-auto z-40 p-5 md:p-0 transition-all duration-300`}
+          className={`${isMenuOpen ? "flex" : "hidden"
+            } flex-col md:flex md:flex-row md:items-center absolute md:static top-full right-0 bg-white md:bg-transparent shadow-lg md:shadow-none rounded-lg md:rounded-none w-4/5 md:w-auto z-40 p-5 md:p-0 transition-all duration-300`}
         >
           <div className="flex flex-col md:flex-row md:space-x-8 md:ml-auto text-center md:text-left font-medium text-base">
             {/* Home */}
             <Link
               to="/"
-              className={`py-2 md:py-0 ${
-                isActive("/") ? "text-[#1D6205]" : "text-gray-800"
-              } hover:text-[#1D6205]`}
+              className={`py-2 md:py-0 ${isActive("/") ? "text-[#1D6205]" : "text-gray-800"
+                } hover:text-[#1D6205]`}
               onClick={() => setIsMenuOpen(false)}
             >
               Home
@@ -127,17 +125,15 @@ const Navbar = () => {
             >
               <button
                 onClick={() => toggleDropdown("about")}
-                className={`flex items-center justify-center md:justify-start w-full md:w-auto py-2 md:py-0 ${
-                  location.pathname === "/who-we-are"
+                className={`flex items-center justify-center md:justify-start w-full md:w-auto py-2 md:py-0 ${location.pathname === "/who-we-are"
                     ? "text-[#1D6205]"
                     : "text-gray-800"
-                } hover:text-[#1D6205]`}
+                  } hover:text-[#1D6205]`}
               >
                 About Us
                 <ChevronDown
-                  className={`ml-1 w-4 h-4 transition-transform ${
-                    aboutOpen ? "rotate-180" : ""
-                  }`}
+                  className={`ml-1 w-4 h-4 transition-transform ${aboutOpen ? "rotate-180" : ""
+                    }`}
                 />
               </button>
 
@@ -148,11 +144,10 @@ const Navbar = () => {
                     initial="hidden"
                     animate="visible"
                     exit="exit"
-                    className={`${
-                      isMobile
+                    className={`${isMobile
                         ? "block pl-6 space-y-1 mt-1"
                         : "absolute left-0 top-full bg-white shadow-xl rounded-md mt-2 w-48 border border-gray-100 text-left"
-                    }`}
+                      }`}
                   >
                     <Link
                       to="/who-we-are"
@@ -165,6 +160,25 @@ const Navbar = () => {
                       Who We Are
                     </Link>
                     <Link
+                      to="/who-we-are#board"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-[#1D6205]/10 hover:text-[#1D6205]"
+                      onClick={(e) => {
+                        setAboutOpen(false);
+                        setIsMenuOpen(false);
+
+                        // If already on who-we-are page, prevent default and scroll smoothly
+                        if (location.pathname === '/who-we-are') {
+                          e.preventDefault();
+                          const boardSection = document.getElementById('board');
+                          if (boardSection) {
+                            boardSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                          }
+                        }
+                      }}
+                    >
+                      Meet Our Board
+                    </Link>
+                    <Link
                       to="/how-we-do-it"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-[#1D6205]/10 hover:text-[#1D6205]"
                       onClick={() => {
@@ -174,6 +188,7 @@ const Navbar = () => {
                     >
                       What We Do
                     </Link>
+
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -182,11 +197,10 @@ const Navbar = () => {
             {/* Our Programs (single link, no active overlap with About Us) */}
             <Link
               to="/how-we-do-it#programs"
-              className={`py-2 md:py-0 ${
-                currentPath === "/how-we-do-it#programs"
+              className={`py-2 md:py-0 ${currentPath === "/how-we-do-it#programs"
                   ? "text-[#1D6205]"
                   : "text-gray-800"
-              } hover:text-[#1D6205]`}
+                } hover:text-[#1D6205]`}
               onClick={() => setIsMenuOpen(false)}
             >
               Our Programs
@@ -202,15 +216,13 @@ const Navbar = () => {
             >
               <button
                 onClick={() => toggleDropdown("grants")}
-                className={`flex items-center justify-center md:justify-start w-full md:w-auto py-2 md:py-0 ${
-                  isActive("/grants") ? "text-[#1D6205]" : "text-gray-800"
-                } hover:text-[#1D6205]`}
+                className={`flex items-center justify-center md:justify-start w-full md:w-auto py-2 md:py-0 ${isActive("/grants") ? "text-[#1D6205]" : "text-gray-800"
+                  } hover:text-[#1D6205]`}
               >
                 Grants & Donations
                 <ChevronDown
-                  className={`ml-1 w-4 h-4 transition-transform ${
-                    grantsOpen ? "rotate-180" : ""
-                  }`}
+                  className={`ml-1 w-4 h-4 transition-transform ${grantsOpen ? "rotate-180" : ""
+                    }`}
                 />
               </button>
 
@@ -221,11 +233,10 @@ const Navbar = () => {
                     initial="hidden"
                     animate="visible"
                     exit="exit"
-                    className={`${
-                      isMobile
+                    className={`${isMobile
                         ? "block pl-6 space-y-1 mt-1"
                         : "absolute left-0 top-full bg-white shadow-xl rounded-md mt-2 w-56 border border-gray-100 text-left"
-                    }`}
+                      }`}
                   >
                     <Link
                       to="/grants"
@@ -255,20 +266,18 @@ const Navbar = () => {
             {/* What's New */}
             <Link
               to="/blog"
-              className={`py-2 md:py-0 ${
-                isActive("/blog") ? "text-[#1D6205]" : "text-gray-800"
-              } hover:text-[#1D6205]`}
+              className={`py-2 md:py-0 ${isActive("/blog") ? "text-[#1D6205]" : "text-gray-800"
+                } hover:text-[#1D6205]`}
               onClick={() => setIsMenuOpen(false)}
             >
-              What’s New
+              What's New
             </Link>
 
             {/* Gallery */}
             <Link
               to="/gallery"
-              className={`py-2 md:py-0 ${
-                isActive("/gallery") ? "text-[#1D6205]" : "text-gray-800"
-              } hover:text-[#1D6205]`}
+              className={`py-2 md:py-0 ${isActive("/gallery") ? "text-[#1D6205]" : "text-gray-800"
+                } hover:text-[#1D6205]`}
               onClick={() => setIsMenuOpen(false)}
             >
               Gallery
@@ -277,9 +286,8 @@ const Navbar = () => {
             {/* Contact Us */}
             <Link
               to="/contact-us"
-              className={`py-2 md:py-0 ${
-                isActive("/contact-us") ? "text-[#1D6205]" : "text-gray-800"
-              } hover:text-[#1D6205]`}
+              className={`py-2 md:py-0 ${isActive("/contact-us") ? "text-[#1D6205]" : "text-gray-800"
+                } hover:text-[#1D6205]`}
               onClick={() => setIsMenuOpen(false)}
             >
               Contact Us

@@ -120,10 +120,10 @@ function Landing() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <p className="text-gray-800 font-bold text-sm md:text-lg uppercase tracking-wide">
+            <p className="text-[#1D6205] font-bold text-sm md:text-lg uppercase tracking-wide">
               Welcome to
             </p>
-            <h2 className="text- font-bold text-3xl sm:text-4xl lg:text-5xl leading-snug mb-4">
+            <h2 className="text-gray-800 font-bold text-3xl sm:text-4xl lg:text-5xl leading-snug mb-4">
               Pleroma Sycamore Foundation (PSF)
             </h2>
             <p className="text-gray-600 mt-4 md:mt-6 leading-relaxed text-base sm:text-lg">
