@@ -11,6 +11,7 @@ import kojo from "../../assets/images/kojo.png";
 import abigail from "../../assets/images/abigail.jpeg";
 import joseph from "../../assets/images/joseph.jpg";
 import dorothy from "../../assets/images/dorothy.jpeg";
+import ben from "../../assets/images/ben.jpg";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import Footer from "../../components/footer";
@@ -140,6 +141,19 @@ Dorothy Otoo brings wisdom, experience, and a nurturing yet strategic leadership
 
     {
       id: 6,
+      name: "Ben Ocra",
+      position: "Member",
+      photo: ben,
+      bio: " Dr. Ocra was born and raised in Ghana. After successfully obtaining his Bachelor’s degree from the University of Ghana, pursue a dual postgraduate degree in Business Administration and Information Technology at the Southern New Hampshire University-USA. While in the United States, he lectured in numerous prestigious academic institutions, founded the MaxImpact Institute, worked for the United Nations and other multinational organizations.",
+      fullProfile: `Dr. Ocra was born and raised in Ghana. After successfully obtaining his Bachelor’s degree from the University of Ghana, pursue a dual postgraduate degree in Business Administration and Information Technology at the Southern New Hampshire University-USA. While in the United States, he lectured in numerous prestigious academic institutions, founded the MaxImpact Institute, worked for the United Nations and other multinational organizations. 
+Ocra has had a long and distinguished career in International Policy, Diplomacy, Information Technology, Philanthropy and International affairs. His wide experience in these areas and his involvement in international development, business and civic organizations have all helped shape his vision for Africa’s development through different frontiers.  He has over 20 years track record in Teaching, Information Technology, Research and International Development with development partners, funders and senior decision-makers in the public and private sectors. 
+Ocra promoted regional co-operation and development through a number of grass root projects aimed at helping the poor in society through his involvement with Institutions such as the United Nations,   the World Bank, Southern New Hampshire University, the University of Ghana, to mention a few. Through this, he developed models for solving development problems and works to scale up successful projects through determining cost effectiveness of poverty alleviation programs, using the most rigorous evaluation techniques.  His foresight, commitment and dedication development related projects has earned him prestigious honors from some United States public officials such as former Governor John Lynch of the State of New Hampshire, former Senator and Mayor Ted Gatsas of Manchester New Hampshire. 
+In Ghana he has being consultant in a number of World Bank projects, The Ghana Government Council for Technical and Vocational Education and Training, was the coordinator for the National ICT Baseline study, National ICT for Accelerated Development Policy, Planned Actions, and Ministry of Communications, he is a frequent TV guest.  He has nurtured hundreds of undergraduate and graduate students including doctoral candidates from the nation’s top Universities including the University of Ghana, the Kwame Nkrumah University of Science and Technology, the University of Professional Studies, and the Accra Institute of Technology. 
+Dr. Ocra is currently a Lecturer, the President of the Ghana Philanthropy Forum, member of the National NPO Working Group, international network partner for the Charity Aid Foundation, Africa Philanthropy Network, the Worldwide Initiative for Grant maker support. He also serve as a visiting lecturer to Universities abroad. `
+    },
+
+    {
+      id: 7,
       name: "Vera Korlekuor Akumiah",
       position: "Board Secretary",
       photo: vera,
@@ -153,7 +167,7 @@ Her hobbies include writing, gardening, cooking and exploring new healthy recipe
     },
 
     {
-      id: 7,
+      id: 8,
       name: "Eric Akumiah",
       position: "Founder & President",
       photo: eric,

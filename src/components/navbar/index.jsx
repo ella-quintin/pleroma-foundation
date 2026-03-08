@@ -216,7 +216,7 @@ const Navbar = () => {
             >
               <button
                 onClick={() => toggleDropdown("grants")}
-                className={`flex items-center justify-center md:justify-start w-full md:w-auto py-2 md:py-0 ${isActive("/grants") ? "text-[#1D6205]" : "text-gray-800"
+                className={`flex items-center justify-center md:justify-start w-full md:w-auto py-2 md:py-0 ${isActive("/grants-application") ? "text-[#1D6205]" : "text-gray-800"
                   } hover:text-[#1D6205]`}
               >
                 Grants & Donations
@@ -239,7 +239,7 @@ const Navbar = () => {
                       }`}
                   >
                     <Link
-                      to="/grants"
+                      to="/grants-application"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-[#1D6205]/10 hover:text-[#1D6205]"
                       onClick={() => {
                         setGrantsOpen(false);

@@ -15,6 +15,7 @@ const GalleryDetail = lazy(() => import("./pages/gallery/gallerydetails"));
 const BlogList = lazy(() => import("./pages/bloglist"));
 const SinglePost = lazy(() => import("./pages/singlepost"));
 const Grant = lazy(() => import("./pages/grant"));
+const NewGrant = lazy(() => import("./pages/newgrant"));
 const Donate = lazy(() => import("./pages/donate"));
 const DonationSuccess = lazy(() => import("./pages/donate/donationSuccess"));
 
@@ -43,6 +44,14 @@ function App() {
                     element: (
                         <Suspense fallback={<PageLoader />}>
                             <Grant />
+                        </Suspense>
+                    ),
+                },
+                {
+                    path: "/grants-application",
+                    element: (
+                        <Suspense fallback={<PageLoader />}>
+                            <NewGrant />
                         </Suspense>
                     ),
                 },
