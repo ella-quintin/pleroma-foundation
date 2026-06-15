@@ -1,6 +1,6 @@
 import Navbar from "../../components/navbar";
 import { Helmet } from "react-helmet-async";
-import { Briefcase, Heart, Users, Book, Video, PersonStanding, Baby, BookOpen, Soup } from "lucide-react";
+import { Briefcase, Heart, Users, Book, Video, PersonStanding, Baby, BookOpen, Soup, GraduationCap } from "lucide-react";
 import boy from "../../assets/boy.jpg";
 import man from "../../assets/man.jpg";
 import hands from "../../assets/images/hands.jpg";
@@ -51,67 +51,62 @@ const HowWeWork = () => {
   const programs = [
     {
       id: 1,
-      title: "Mustard Seed Christian Entrepreneurship Development Program",
+      title: "Kingdom Entrepreneurs & Youth Empowerment",
+      subtitle: "MSCEDP + Y4J + Sow & Grow",
       description:
-        "Empowering businesses to thrive under Christian principles through entrepreneurship development.",
+        "Integrates entrepreneurship, discipleship, mentorship, and seed support so young people become spiritually grounded and economically productive Kingdom builders.",
+      target:
+        "100 trained per cohort, 50 active enterprises, strong discipleship retention.",
       icon: <Briefcase className="w-10 h-10 text-[#1D6205] mr-4" />,
       image: womanSelling,
     },
+
     {
       id: 2,
-      title: "Youth For Jesus (Y4J) Initiative",
+      title: "The Sycamore Institute",
+      subtitle: "Leadership + Evangelism + Ministerial Support",
       description:
-        "A faith-building initiative aimed at equipping the youth to live Christ-centered lives.",
-      icon: <PersonStanding className="w-10 h-10 text-[#1D6205] mr-4" />,
-      image: youth,
-    },
-    {
-      id: 3,
-      title: "Children For Jesus (C4J) Initiative",
-      description:
-        "Programs to nurture and guide children in their faith journey through Christ-centered teachings.",
-      icon: <Baby className="w-10 h-10 text-[#1D6205] mr-4" />,
-      image: children,
-    },
-    {
-      id: 4,
-      title: "School of Evangelism - Masterclass",
-      description:
-        "A masterclass for equipping believers with the knowledge and skills to effectively share the gospel.",
-      icon: <BookOpen className="w-10 h-10 text-[#1D6205] mr-4" />,
-      image: bible,
-    },
-    {
-      id: 5,
-      title: "Sycamore School of Christian Leadership - Masterclass",
-      description:
-        "A program to develop Christian leaders equipped to lead with excellence and integrity.",
+        "Forms leaders, mobilises evangelists, and sustains pastors, missionaries, and ministry workers across the full ministerial lifecycle.",
+      target:
+        "150+ leaders formed, 100 evangelists trained, 30 ministers supported annually.",
       icon: <Book className="w-10 h-10 text-[#1D6205] mr-4" />,
       image: leadership,
     },
+
     {
-      id: 6,
-      title: "Home and Day Care for the Aged",
+      id: 3,
+      title: "The Compassion Table",
+      subtitle: "Senior Care + Nourishment + Community Outreach",
       description:
-        "Providing compassionate care and support for the elderly within the community.",
+        "Combines elder care and soup kitchen outreach to serve overlooked people with dignity, practical support, and community-based compassion.",
+      target:
+        "30 elders in care, 5,000 meals annually, 50 trained volunteers.",
       icon: <Heart className="w-10 h-10 text-[#1D6205] mr-4" />,
       image: helping,
     },
+
     {
-      id: 7,
-      title: "Soup Kitchen",
+      id: 4,
+      title: "Prof. E.V. Doku Academic Excellence Initiative",
+      subtitle: "Education Fund + Bridges to Brilliance",
       description:
-        "Serving warm meals to the needy, embodying the love and compassion of Christ.",
-      icon: <Soup className="w-10 h-10 text-[#1D6205] mr-4" />,
-      image: food,
+        "Provides scholarships, mentorship, skills-building, and advocacy so gifted but economically constrained students can thrive and contribute to Ghana's future.",
+      target:
+        "20 scholars supported annually, 90% completion, full mentorship coverage.",
+      icon: <GraduationCap className="w-10 h-10 text-[#1D6205] mr-4" />,
+      image: youth,
     },
+
     {
-      id: 8,
-      title: "Pleroma-Sycamore Media Ministry",
+      id: 5,
+      title: "Children for Jesus (C4J)",
+      subtitle: "Faith, Character & Leadership Formation",
       description:
-        "Using media to spread the gospel and positively influence communities through Christ-centered content.",
-      icon: <Video className="w-10 h-10 text-[#1D6205] mr-4" />,
-      image: media,
+        "Builds the spiritual and moral foundation of children while training teachers and volunteers who shape the next generation.",
+      target:
+        "500 children reached by Year 5, 30 teachers trained annually, strong safeguarding compliance.",
+      icon: <Baby className="w-10 h-10 text-[#1D6205] mr-4" />,
+      image: children,
     },
   ];
 
@@ -195,6 +190,7 @@ const HowWeWork = () => {
         </div>
       </motion.div>
 
+
       <motion.div
         className="px-4 sm:px-8 lg:px-16 py-10 mb-16 bg-[#f9f9f9]"
         initial={{ opacity: 0 }}
@@ -202,8 +198,9 @@ const HowWeWork = () => {
         transition={{ duration: 0.8 }}
       >
         <div ref={programsRef} id="programs" className="py-8">
+
           <motion.h2
-            className="text-[#1D6205] font-bold text-2xl sm:text-3xl lg:text-4xl mb-8 text-center"
+            className="text-[#1D6205] font-bold text-2xl sm:text-3xl lg:text-4xl mb-12 text-center"
             initial={{ y: -20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
@@ -211,45 +208,103 @@ const HowWeWork = () => {
           >
             Our Programs
           </motion.h2>
+
           <Swiper
             modules={[Navigation]}
             navigation
-            spaceBetween={16}
+            spaceBetween={24}
             slidesPerView={1}
             breakpoints={{
               640: { slidesPerView: 1 },
               768: { slidesPerView: 2 },
               1024: { slidesPerView: 3 },
             }}
-            className="max-w-full mx-auto"
+            className="max-w-full mx-auto  pb-10"
           >
             {programs.map((program) => (
               <SwiperSlide key={program.id}>
                 <motion.div
-                  className="bg-white rounded-lg shadow-lg overflow-hidden w-72 mx-auto"
-                  initial={{ opacity: 0, scale: 0.9 }}
+                  className="
+              bg-white
+                rounded-3xl
+                overflow-hidden
+                shadow-sm
+                hover:shadow-2xl
+                hover:-translate-y-2
+                transition-all
+                duration-300
+                flex
+                flex-col
+                mb-8
+              
+                mx-auto
+                "
+                  initial={{ opacity: 0, scale: 0.95 }}
                   whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.8 }}
+                  transition={{ duration: 0.6 }}
                   viewport={{ once: true }}
                 >
-                  <img
-                    src={program.image}
-                    alt={program.title}
-                    className="w-full h-48 object-cover"
-                  />
-                  <div className="p-4">
-                    <div className="flex items-center mb-3">
-                      {program.icon}
-                      <h3 className="font-bold text-md text-gray-800">{program.title}</h3>
-                    </div>
-                    <p className="text-gray-600 text-sm">{program.description}</p>
+
+                  {/* Image Section */}
+                  <div className="relative">
+
+                    <img
+                      src={program.image}
+                      alt={program.title}
+                      className="w-full h-60 object-cover"
+                    />
+
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+
+                    {/* Program Number */}
+                    
+
                   </div>
+
+                  {/* Content */}
+                  <div className="p-6 flex flex-col flex-grow">
+
+                    {/* Icon */}
+                    <div className="text-center mb-5">
+
+
+                      <h3 className="font-bold text-xl text-gray-900 leading-tight">
+                        {program.title}
+                      </h3>
+
+                      <p className="text-[#1D6205] font-semibold mt-2 text-sm">
+                        {program.subtitle}
+                      </p>
+
+                    </div>
+
+                    {/* Description */}
+                    <p className="text-gray-600 leading-relaxed text-sm flex-grow">
+                      {program.description}
+                    </p>
+
+                    {/* Target Outcomes */}
+                    <div className="mt-6 bg-[#1D6205]/5 border border-[#1D6205]/15 rounded-xl p-4">
+                      <h4 className="font-bold text-[#1D6205] mb-2">
+                        Target Outcomes
+                      </h4>
+
+                      <p className="text-sm text-gray-700 leading-relaxed">
+                        {program.target}
+                      </p>
+                    </div>
+
+                  </div>
+
                 </motion.div>
               </SwiperSlide>
             ))}
           </Swiper>
+
         </div>
       </motion.div>
+
+
 
       {showScrollButton && (
         <motion.button

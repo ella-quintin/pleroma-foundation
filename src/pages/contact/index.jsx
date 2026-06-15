@@ -50,7 +50,7 @@ const Contact = () => {
       >
         {/* Header Section */}
         <motion.section
-          className="relative bg-cover bg-center h-72 w-full"
+          className="relative bg-cover bg-center h-64 w-full"
           style={{ backgroundImage: `url(${contact})` }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

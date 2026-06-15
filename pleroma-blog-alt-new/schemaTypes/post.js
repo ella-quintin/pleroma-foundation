@@ -8,6 +8,22 @@ export default {
       title: 'Title',
       type: 'string',
     },
+
+    {
+      name: 'category',
+      title: 'Category',
+      type: 'string',
+      initialValue: 'story',
+      options: {
+        list: [
+          { title: 'Story', value: 'story' },
+          { title: 'Impact', value: 'impact' },
+        ],
+        layout: 'radio',
+      },
+      validation: Rule => Rule.required(),
+    },
+
     {
       name: 'slug',
       title: 'Slug',
@@ -17,13 +33,16 @@ export default {
         maxLength: 96,
       },
     },
+
     {
       name: 'excerpt',
       title: 'SEO Excerpt / Summary',
       type: 'text',
       rows: 3,
-      description: 'Short summary used for search engines and previews (150–160 characters)',
+      description:
+        'Short summary used for search engines and previews (150–160 characters)',
     },
+
     {
       name: 'mainImage',
       title: 'Main Image',
@@ -32,11 +51,13 @@ export default {
         hotspot: true,
       },
     },
+
     {
       name: 'publishedAt',
       title: 'Published At',
       type: 'datetime',
     },
+
     {
       name: 'body',
       title: 'Body Content',

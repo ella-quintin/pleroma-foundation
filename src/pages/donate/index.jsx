@@ -48,16 +48,16 @@ const Donate = () => {
             >
                 {/* Header Section */}
                 <motion.section
-                    className="relative bg-cover bg-center h-72 w-full"
+                    className="relative bg-cover bg-center h-64 w-full"
                     style={{ backgroundImage: `url(${donate})` }}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.8 }}
                 >
                     <div className="absolute inset-0 bg-black/70 flex justify-center items-center">
-                        <div className="text-center px-4">
+                        <div className="text-center px-4 mt-12">
                             <motion.h3
-                                className="text-white text-3xl md:text-4xl font-bold drop-shadow-lg mb-6"
+                                className="text-white text-3xl md:text-4xl font-bold drop-shadow-lg mb-4"
                                 initial={{ y: -20, opacity: 0 }}
                                 animate={{ y: 0, opacity: 1 }}
                                 transition={{ duration: 0.6 }}
@@ -103,7 +103,7 @@ const Donate = () => {
                         animate="show"
                         className="text-center"
                     >
-                        <h3 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 leading-tight">
+                        <h3 className="text-4xl md:text-4xl font-bold text-gray-800 mb-6 leading-tight">
                             Give to God’s Work.
                             <br />
                             Transform Lives Through Faith & Love.

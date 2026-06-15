@@ -3,7 +3,14 @@ import { Helmet } from "react-helmet-async";
 import hero from "../../assets/images/hero.jpg";
 import mother from "../../assets/images/mother.jpg";
 import handthree from "../../assets/images/handthree.jpg";
-import { Eye, Goal, HeartHandshake, ShieldCheck } from "lucide-react";
+import {
+  Eye, Goal, HeartHandshake, ShieldCheck, Shield,
+  Scale,
+  Briefcase,
+  Award,
+  HandHeart,
+  Heart,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
@@ -52,6 +59,7 @@ function Landing() {
   return (
     <>
       <Navbar />
+      
 
       <Helmet>
         <title>Faith-Based NGO in Ghana | Pleroma Sycamore Foundation</title>
@@ -162,49 +170,112 @@ function Landing() {
         </div>
       </motion.div >
 
+    
       {/* Mission and Vision Section */}
-      < motion.div
+      <motion.div
         className="relative py-28 px-4 sm:px-8 md:px-12 lg:px-20 bg-gray-100"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 1 }}
         viewport={{ once: true, amount: 0.2 }}
       >
+        {/* Background */}
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${mother})` }}
         >
-          <div className="absolute inset-0 bg-black opacity-70"></div>
+          <div className="absolute inset-0 bg-black/70"></div>
         </div>
 
-        <div className="relative grid grid-cols-1 sm:grid-cols-2 gap-8 z-10 max-w-6xl mx-auto">
-          {/* Vision Box */}
+        {/* Content Wrapper */}
+        <div className="relative z-10 max-w-6xl mx-auto">
+
+          {/* Vision & Mission */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+
+            {/* Vision Box */}
+            <motion.div
+              className="bg-black/70 p-8 rounded-2xl text-center shadow-lg hover:scale-105 transition-transform duration-300"
+              initial={{ y: 50, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6 }}
+            >
+              <Eye className="w-12 h-12 text-[#1D6205] mx-auto mb-4" />
+              <h3 className="font-bold text-2xl mb-2 text-white">Vision</h3>
+              <p className="text-white">
+                A world shaped by love, dignity and the enduring power of Christian
+                values to heal, restore and transform.
+              </p>
+            </motion.div>
+
+            {/* Mission Box */}
+            <motion.div
+              className="bg-black/70 p-8 rounded-2xl text-center shadow-lg hover:scale-105 transition-transform duration-300"
+              initial={{ y: 50, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6 }}
+            >
+              <Goal className="w-12 h-12 text-[#1D6205] mx-auto mb-4" />
+              <h3 className="font-bold text-2xl mb-2 text-white">Mission</h3>
+              <p className="text-white">
+                PSF empowers individuals, strengthens families, and transforms
+                communities through Christian love and purposeful action.
+              </p>
+            </motion.div>
+
+          </div>
+
+          {/* Core Values */}
           <motion.div
-            className="bg-black bg-opacity-70 p-8 rounded-2xl text-center shadow-lg hover:scale-105 transition-transform duration-300"
-            initial={{ y: 50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
+            className="relative z-10 mt-10 bg-black/70 p-8 rounded-2xl shadow-lg"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6 }}
           >
-            <Eye className="w-12 h-12 text-[#1D6205] mx-auto mb-4" />
-            <h3 className="font-bold text-2xl mb-2 text-white">Vision</h3>
-            <p className="text-white">
-              To make the world a place of love and empowerment by the Holy Spirit in these end times.
-            </p>
+            <h3 className="text-3xl font-bold text-center text-white mb-8">
+              Core Values
+            </h3>
+
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+
+              <div className="text-center">
+                <Shield className="w-10 h-10 text-[#1D6205] mx-auto mb-3" />
+                <p className="text-white font-medium">Discipline</p>
+              </div>
+
+              <div className="text-center">
+                <Scale className="w-10 h-10 text-[#1D6205] mx-auto mb-3" />
+                <p className="text-white font-medium">Integrity</p>
+              </div>
+
+              <div className="text-center">
+                <Briefcase className="w-10 h-10 text-[#1D6205] mx-auto mb-3" />
+                <p className="text-white font-medium">Competence</p>
+              </div>
+
+              <div className="text-center">
+                <Award className="w-10 h-10 text-[#1D6205] mx-auto mb-3" />
+                <p className="text-white font-medium">Excellence</p>
+              </div>
+
+              <div className="text-center">
+                <HandHeart className="w-10 h-10 text-[#1D6205] mx-auto mb-3" />
+                <p className="text-white font-medium">Compassion</p>
+              </div>
+
+              <div className="text-center">
+                <Heart className="w-10 h-10 text-[#1D6205] mx-auto mb-3" />
+                <p className="text-white font-medium">Love</p>
+              </div>
+
+            </div>
           </motion.div>
 
-          {/* Mission Box */}
-          <motion.div
-            className="bg-black bg-opacity-70 p-8 rounded-2xl text-center shadow-lg hover:scale-105 transition-transform duration-300"
-            initial={{ y: 50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-          >
-            <Goal className="w-12 h-12 text-[#1D6205] mx-auto mb-4" />
-            <h3 className="font-bold text-2xl mb-2 text-white">Mission</h3>
-            <p className="text-white">
-              Working with Christian partners to empower God's people to fulfil God's purpose for the world.
-            </p>
-          </motion.div>
         </div>
-      </motion.div >
+      </motion.div>
 
 
 

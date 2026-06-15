@@ -1,7 +1,7 @@
 
 import emailjs from "@emailjs/browser";
 import { useRef } from "react";
-import { Facebook, Twitter, Linkedin } from 'lucide-react';
+import { Instagram, Facebook, Twitter, Linkedin } from 'lucide-react';
 import { MapPin, Phone, Mail } from 'lucide-react';
 
 
@@ -41,9 +41,9 @@ const Footer = () => {
           </p>
           <h3 className="text-lg text-left font-bold mb-3">Social Media</h3>
           <div className="mt-4 flex text-left space-x-4">
-            <a href="#" className="hover:text-gray-300"><Facebook size={20} /></a>
-            <a href="#" className="hover:text-gray-300"><Twitter size={20} /></a>
-            <a href="#" className="hover:text-gray-300"><Linkedin size={20} /></a>
+            <a href=" https://www.instagram.com/pleromasycamorefoundation?igsh=ZDg0NW1yMXRwbmd4" className="hover:text-gray-300"><Instagram size={20} /></a>
+            <a href=" https://www.facebook.com/share/18gTCwEYJ3/?mibextid=wwXIfr" className="hover:text-gray-300"><Facebook size={20} /></a>
+            <a href="https://www.linkedin.com/in/pleroma-sycamore-foundation-108011406?utm_source=share_via&utm_content=profile&utm_medium=member_ios" className="hover:text-gray-300"><Linkedin size={20} /></a>
           </div>
         </div>
 
@@ -74,14 +74,11 @@ const Footer = () => {
           <div className="mb-6">
             <h3 className="text-lg font-bold mb-4">Our Programs</h3>
             <ul className="space-y-3 text-sm font-thin text-white hover:text-gray-100">
-              <li>Mustard Seed Christian Entrepreneurship Development Program</li>
-              <li>Youth For Jesus (Y4J) Initiative</li>
-              <li>Children for Jesus (C4J) Initiative </li>
-              <li>School of Evangelism - Masterclass</li>
-              <li>Sycamore School of Christian Leadership - Masterclass</li>
-              <li>Home and Day Care for the Aged</li>
-              <li>Soup Kitchen </li>
-              <li>Pleroma-Sycamore Media Ministry</li>
+              <li>Kingdom Entrepreneurs & Youth Empowerment</li>
+              <li>The Sycamore Institute</li>
+              <li>The Compassion Table</li>
+              <li>Prof. E.V. Doku Academic Excellence Initiative</li>
+              <li>Children for Jesus (C4J)</li>
             </ul>
           </div>
         </div>

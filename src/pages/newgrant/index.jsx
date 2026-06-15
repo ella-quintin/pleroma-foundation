@@ -36,7 +36,7 @@ const NewGrant = () => {
 
         {/* ── Hero — structure untouched, overlay improved ── */}
         <section
-          className="relative h-[320px] bg-cover bg-center flex items-center justify-center"
+          className="relative h-64 bg-cover bg-center flex items-center justify-center"
           style={{ backgroundImage: `url(${grant})` }}
         >
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/65 to-black/80" />
@@ -56,7 +56,7 @@ const NewGrant = () => {
         </section>
 
         {/* ── Closed Notice ── */}
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-24 md:py-32">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-24 ">
           <div className="max-w-2xl mx-auto text-center">
 
             {/* Animated stamp icon */}
