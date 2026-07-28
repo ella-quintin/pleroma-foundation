@@ -8,6 +8,7 @@ import WhoWeAre from "./pages/wwa";
 import HowWeDo from "./pages/hwd";
 import Contact from "./pages/contact";
 import HowWeWork from "./pages/hwd";
+import Resources from "./pages/resources";
 
 // Lazy-loaded pages
 const GalleryAlbums = lazy(() => import("./pages/gallery"));
@@ -36,6 +37,7 @@ function App() {
                 { path: "/who-we-are", element: <WhoWeAre /> },
                 { path: "/what-we-do", element: <WhatWeDo /> },
                 { path: "/how-we-do-it", element: <HowWeDo /> },
+                { path: "/resources", element: <Resources /> },
                 { path: "/contact-us", element: <Contact /> },
                 { path: "/how-we-work", element: <HowWeWork /> },
 

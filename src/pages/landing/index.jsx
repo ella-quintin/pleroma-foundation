@@ -95,7 +95,7 @@ function Landing() {
             transition={{ duration: 0.9, ease: 'easeOut' }}
           >
             <h2 className="text-white text-2xl sm:text-3xl md:text-5xl font-bold leading-tight mt-2">
-              Empowered by Faith, Guided by Purpose
+              Empowering Communities. Advancing Faith. Transforming Lives.
             </h2>
 
             <p className="text-white/90 text-base sm:text-lg max-w-3xl font-light">
