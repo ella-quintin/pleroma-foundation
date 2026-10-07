@@ -13,9 +13,9 @@ import {
   CheckCircle2,
   MailCheck,
   Leaf,
+  HeartHandshake,
 } from "lucide-react";
-import Navbar from "../../components/navbar";
-import { Helmet } from "react-helmet-async";
+import SEO from "../../components/seo";
 
 const SinglePost = () => {
   const { slug } = useParams();
@@ -55,6 +55,7 @@ const SinglePost = () => {
               category,
               publishedAt,
               slug,
+              showDonateButton,
               mainImage{
                 asset->{url}
               }
@@ -165,24 +166,19 @@ const SinglePost = () => {
 
   return (
     <>
-      <Navbar />
 
-      <Helmet>
-        <title>
-          {post.title} |
-          Pleroma Sycamore
-          Foundation
-        </title>
+      <SEO
+        title={`${post.title} | Pleroma Sycamore Foundation`}
+        description={getExcerpt(post.body)}
+        path={`/blog/${slug}`}
+        image={post.mainImage?.asset?.url}
+        type="article"
+      />
 
-        <meta
-          name="description"
-          content={getExcerpt(
-            post.body
-          )}
-        />
-      </Helmet>
-
-      <div className="bg-white min-h-screen mt-28 mb-28 pt-16 px-4 md:px-12">
+      <div
+        className="bg-white min-h-screen mb-28 pt-16 px-4 md:px-12"
+        style={{ marginTop: "var(--nav-height)" }}
+      >
 
         {/* Main Post */}
         <div className="max-w-4xl mx-auto">
@@ -230,6 +226,32 @@ const SinglePost = () => {
               value={post.body}
             />
           </div>
+
+          {post.showDonateButton && (
+            <div className="mt-10 bg-[#1D6205]/5 border border-[#1D6205]/15 rounded-2xl p-6 sm:p-8 text-center">
+              <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-2">
+                Help Make This Story Possible
+              </h3>
+              <p className="text-gray-600 text-sm sm:text-base mb-6 max-w-md sm:max-w-xl mx-auto">
+                Your donation can directly support this initiative and help bring it to life.
+              </p>
+              <button
+                type="button"
+                onClick={() =>
+                  window.open(
+                    import.meta.env.VITE_DONATION_URL,
+                    "_blank",
+                    "noopener,noreferrer"
+                  )
+                }
+                className="inline-flex items-center justify-center gap-2 bg-[#1D6205] text-white font-semibold text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-3.5 rounded-full hover:bg-[#155304] transition-colors duration-300 shadow-md hover:shadow-lg whitespace-nowrap"
+              >
+                <HeartHandshake className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+                <span className="sm:hidden">Donate Now</span>
+                <span className="hidden sm:inline">Donate to Support This Story</span>
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Newsletter Section */}
@@ -326,7 +348,7 @@ const SinglePost = () => {
                       onSubmit={handleSubscribe}
                       className="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-6 sm:p-7 shadow-xl"
                     >
-                      <div className="grid grid-cols-2 gap-3 mb-3">
+                      <div className="grid grid-cols-1 gap-3 mb-3">
                         <div className="relative">
                           <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                           <input
@@ -413,10 +435,15 @@ const SinglePost = () => {
 
               <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 {morePosts.map(
-                  (p) => (
-                    <div
+                  (p, index) => (
+                    <motion.div
                       key={p._id}
                       className="bg-gray-100 rounded-lg overflow-hidden shadow hover:shadow-lg transition duration-300"
+                      initial={{ y: 20 }}
+                      whileInView={{ y: 0 }}
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{ duration: 0.45, delay: index * 0.06, ease: "easeOut" }}
+                      whileHover={{ y: -4 }}
                     >
                       <img
                         src={
@@ -459,7 +486,7 @@ const SinglePost = () => {
                           Read more →
                         </Link>
                       </div>
-                    </div>
+                    </motion.div>
                   )
                 )}
               </div>

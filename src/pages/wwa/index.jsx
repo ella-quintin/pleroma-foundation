@@ -1,6 +1,5 @@
 import woman from "../../assets/woman.jpg";
-import Navbar from '../../components/navbar';
-import { Helmet } from "react-helmet-async";
+import SEO from "../../components/seo";
 import man from "../../assets/man.jpg";
 import boy from "../../assets/boy.jpg";
 import handthree from "../../assets/images/handthree.jpg";
@@ -187,21 +186,19 @@ As Founder and President, Eric provides strategic leadership and spiritual direc
 
   return (
     <>
-      <Navbar />
 
-      <Helmet>
-        <title>Who We Are | Pleroma Sycamore Foundation – Faith-Based NGO in Ghana</title>
-        <meta
-          name="description"
-          content="Learn about Pleroma Sycamore Foundation, a faith-based NGO in Ghana dedicated to Christian outreach, community development, youth empowerment, and social transformation."
-        />
-      </Helmet>
+      <SEO
+        title="Who We Are | Pleroma Sycamore Foundation"
+        description="Meet Pleroma Sycamore Foundation, a Christian NGO in Ghana: our vision, mission, core values, and the board driving our community work."
+        path="/who-we-are"
+        image={handthree}
+      />
 
       <div className="mb-20">
         {/* About Us Section */}
         <motion.div
-          className="relative w-full h-64 mt-16 bg-cover bg-center"
-          style={{ backgroundImage: `url(${handthree})` }}
+          className="relative w-full h-64 bg-cover bg-center"
+          style={{ backgroundImage: `url(${handthree})`, marginTop: "var(--nav-height)" }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
@@ -219,17 +216,11 @@ As Founder and President, Eric provides strategic leadership and spiritual direc
         </motion.div>
 
         {/* Welcome Section */}
-        <motion.div
-          className="container mx-auto mt-12 py-16 px-6 lg:px-8 max-w-screen-lg grid lg:grid-cols-2 gap-8"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true, amount: 0.2 }}
-        >
+        <div className="container mx-auto mt-12 py-16 px-6 lg:px-8 max-w-screen-lg grid lg:grid-cols-2 gap-8">
           {/* Text Content */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ x: -50 }}
+            whileInView={{ x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
@@ -255,42 +246,26 @@ As Founder and President, Eric provides strategic leadership and spiritual direc
               Our core areas of focus include:
             </p>
             <ul className="list-disc pl-6 text-gray-600 leading-relaxed sm:text-md mb-6">
-              <motion.li
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-              >
+              <li>
                 Supporting Christian missions, ministries, and outreaches focused on propagating the Word of God.
-              </motion.li>
-              <motion.li
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
+              </li>
+              <li>
                 Providing social interventions for the aged, youth and children.
-              </motion.li>
-              <motion.li
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-              >
+              </li>
+              <li>
                 Supporting Christian leadership and entrepreneurship development.
-              </motion.li>
-              <motion.li
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-              >
+              </li>
+              <li>
                 Mitigate accommodation challenges through social housing.
-              </motion.li>
+              </li>
             </ul>
           </motion.div>
 
           {/* Image */}
           <motion.div
             className="flex justify-center"
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ scale: 0.9 }}
+            whileInView={{ scale: 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
@@ -300,7 +275,7 @@ As Founder and President, Eric provides strategic leadership and spiritual direc
               className="rounded-lg shadow-lg"
             />
           </motion.div>
-        </motion.div>
+        </div>
 
         {/* Board Members Section */}
         <section id="board" className="py-20 bg-gradient-to-b from-gray-50 to-white">
@@ -308,8 +283,8 @@ As Founder and President, Eric provides strategic leadership and spiritual direc
             {/* Section Header */}
             <motion.div
               className="text-center mb-16"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ y: 20 }}
+              whileInView={{ y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
@@ -335,8 +310,8 @@ As Founder and President, Eric provides strategic leadership and spiritual direc
               {boardMembers.map((member, index) => (
                 <motion.div
                   key={member.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ y: 30 }}
+                  whileInView={{ y: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
@@ -355,7 +330,7 @@ As Founder and President, Eric provides strategic leadership and spiritual direc
                     {/* Image Container */}
                     <div className="relative h-80 overflow-hidden bg-gray-200">
                       <img
-                        src={member.photo} o
+                        src={member.photo}
                         alt={`${member.name} - ${member.position}`}
                         className="w-full h-full object-cover object-top transition-all duration-500 group-hover:scale-110"
                         loading="lazy"

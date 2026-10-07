@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  color-scheme: light only;
+  --nav-height: 96px;
+}
+
+html,
+body {
+  background-color: #ffffff;
+}

@@ -3,11 +3,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import AppLayout from "./components/appLayout";
 import Landing from "./pages/landing";
-import WhatWeDo from "./pages/wwd";
 import WhoWeAre from "./pages/wwa";
-import HowWeDo from "./pages/hwd";
+import WhatWeDo from "./pages/hwd";
 import Contact from "./pages/contact";
-import HowWeWork from "./pages/hwd";
 import Resources from "./pages/resources";
 
 // Lazy-loaded pages
@@ -15,10 +13,10 @@ const GalleryAlbums = lazy(() => import("./pages/gallery"));
 const GalleryDetail = lazy(() => import("./pages/gallery/gallerydetails"));
 const BlogList = lazy(() => import("./pages/bloglist"));
 const SinglePost = lazy(() => import("./pages/singlepost"));
-const Grant = lazy(() => import("./pages/grant"));
 const NewGrant = lazy(() => import("./pages/newgrant"));
 const Donate = lazy(() => import("./pages/donate"));
 const DonationSuccess = lazy(() => import("./pages/donate/donationSuccess"));
+const ProgramDetail = lazy(() => import("./pages/programdetail"));
 
 const PageLoader = () => (
     <div className="min-h-[60vh] flex items-center justify-center">
@@ -35,17 +33,16 @@ function App() {
             children: [
                 { path: "/", element: <Landing /> },
                 { path: "/who-we-are", element: <WhoWeAre /> },
-                { path: "/what-we-do", element: <WhatWeDo /> },
-                { path: "/how-we-do-it", element: <HowWeDo /> },
+                { path: "/how-we-do-it", element: <WhatWeDo /> },
                 { path: "/resources", element: <Resources /> },
                 { path: "/contact-us", element: <Contact /> },
-                { path: "/how-we-work", element: <HowWeWork /> },
+                { path: "/how-we-work", element: <WhatWeDo /> },
 
                 {
-                    path: "/grants",
+                    path: "/our-programs/:slug",
                     element: (
                         <Suspense fallback={<PageLoader />}>
-                            <Grant />
+                            <ProgramDetail />
                         </Suspense>
                     ),
                 },

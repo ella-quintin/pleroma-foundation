@@ -25,6 +25,24 @@ export default {
     },
 
     {
+      name: 'featured',
+      title: "Feature on What's New",
+      type: 'boolean',
+      description:
+        "Pin this post to the top of the What's New page, overriding the default (most recently published) post. Turn off to let the most recent post take over again.",
+      initialValue: false,
+    },
+
+    {
+      name: 'showDonateButton',
+      title: 'Show Donate Button',
+      type: 'boolean',
+      description:
+        'Display a "Donate to Support This Story" button on this post, for stories tied to a specific need or appeal.',
+      initialValue: false,
+    },
+
+    {
       name: 'slug',
       title: 'Slug',
       type: 'slug',

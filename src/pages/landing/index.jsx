@@ -1,5 +1,4 @@
-import Navbar from "../../components/navbar";
-import { Helmet } from "react-helmet-async";
+import SEO from "../../components/seo";
 import hero from "../../assets/images/hero.jpg";
 import mother from "../../assets/images/mother.jpg";
 import handthree from "../../assets/images/handthree.jpg";
@@ -9,12 +8,12 @@ import {
   Briefcase,
   Award,
   HandHeart,
-  Heart,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import RecentBlogs from "./components/recentBlogs.jsx";
+import Newsletter from "../../components/newsletter";
 import Footer from "../../components/footer";
 
 function Landing() {
@@ -58,16 +57,12 @@ function Landing() {
 
   return (
     <>
-      <Navbar />
-      
-
-      <Helmet>
-        <title>Faith-Based NGO in Ghana | Pleroma Sycamore Foundation</title>
-        <meta
-          name="description"
-          content="Pleroma Sycamore Foundation is a faith-based NGO in Ghana dedicated to community development, youth empowerment, Christian outreach, and social transformation."
-        />
-      </Helmet>
+      <SEO
+        title="Christian NGO in Ghana | Pleroma Sycamore Foundation"
+        description="Pleroma Sycamore Foundation is a Christian NGO in Ghana empowering youth, supporting the aged, and transforming communities through faith-led outreach."
+        path="/"
+        image={hero}
+      />
 
 
       {/* Hero Section */}
@@ -113,19 +108,12 @@ function Landing() {
 
 
       {/* About Section */}
-      < motion.div
-        className="px-4 sm:px-8 md:px-12 lg:px-20 py-16 md:py-28 bg-white relative overflow-hidden"
-        initial={{ opacity: 0, y: 50 }
-        }
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        viewport={{ once: true, amount: 0.2 }}
-      >
+      <div className="px-4 sm:px-8 md:px-12 lg:px-20 py-16 md:py-28 bg-white relative overflow-hidden">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
           {/* Text Content */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ x: -50 }}
+            whileInView={{ x: 0 }}
             transition={{ duration: 0.8 }}
           >
             <p className="text-[#1D6205] font-bold text-sm md:text-lg uppercase tracking-wide">
@@ -151,8 +139,8 @@ function Landing() {
           {/* Image Content */}
           <motion.div
             className="flex justify-center md:justify-end relative"
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ x: 50 }}
+            whileInView={{ x: 0 }}
             transition={{ duration: 0.8 }}
           >
             <motion.img
@@ -168,17 +156,10 @@ function Landing() {
             <div className="absolute -bottom-6 -right-6 w-40 h-40 bg-[#1D6205]/20 blur-3xl rounded-full hidden md:block"></div>
           </motion.div>
         </div>
-      </motion.div >
+      </div>
 
-    
       {/* Mission and Vision Section */}
-      <motion.div
-        className="relative py-28 px-4 sm:px-8 md:px-12 lg:px-20 bg-gray-100"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-        viewport={{ once: true, amount: 0.2 }}
-      >
+      <div className="relative py-28 px-4 sm:px-8 md:px-12 lg:px-20 bg-gray-100">
         {/* Background */}
         <div
           className="absolute inset-0 bg-cover bg-center"
@@ -196,8 +177,8 @@ function Landing() {
             {/* Vision Box */}
             <motion.div
               className="bg-black/70 p-8 rounded-2xl text-center shadow-lg hover:scale-105 transition-transform duration-300"
-              initial={{ y: 50, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
+              initial={{ y: 30 }}
+              whileInView={{ y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6 }}
             >
@@ -212,8 +193,8 @@ function Landing() {
             {/* Mission Box */}
             <motion.div
               className="bg-black/70 p-8 rounded-2xl text-center shadow-lg hover:scale-105 transition-transform duration-300"
-              initial={{ y: 50, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
+              initial={{ y: 30 }}
+              whileInView={{ y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6 }}
             >
@@ -230,8 +211,8 @@ function Landing() {
           {/* Core Values */}
           <motion.div
             className="relative z-10 mt-10 bg-black/70 p-8 rounded-2xl shadow-lg"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ y: 30 }}
+            whileInView={{ y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6 }}
           >
@@ -239,7 +220,7 @@ function Landing() {
               Core Values
             </h3>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
 
               <div className="text-center">
                 <Shield className="w-10 h-10 text-[#1D6205] mx-auto mb-3" />
@@ -257,25 +238,20 @@ function Landing() {
               </div>
 
               <div className="text-center">
-                <Award className="w-10 h-10 text-[#1D6205] mx-auto mb-3" />
-                <p className="text-white font-medium">Excellence</p>
-              </div>
-
-              <div className="text-center">
                 <HandHeart className="w-10 h-10 text-[#1D6205] mx-auto mb-3" />
                 <p className="text-white font-medium">Compassion</p>
               </div>
 
               <div className="text-center">
-                <Heart className="w-10 h-10 text-[#1D6205] mx-auto mb-3" />
-                <p className="text-white font-medium">Love</p>
+                <Award className="w-10 h-10 text-[#1D6205] mx-auto mb-3" />
+                <p className="text-white font-medium">Excellence</p>
               </div>
 
             </div>
           </motion.div>
 
         </div>
-      </motion.div>
+      </div>
 
 
 
@@ -306,8 +282,8 @@ function Landing() {
 
           {/* Left content */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ y: 40 }}
+            whileInView={{ y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: "easeOut" }}
           >
@@ -317,9 +293,8 @@ function Landing() {
 
             <p className="text-gray-600 text-base sm:text-lg leading-relaxed mb-6 max-w-xl">
               Your generosity supports a trusted Christian NGO in Ghana,
-              helping us empower youth, care for vulnerable groups, and
-              strengthen communities through faith-driven programs.Your generosity helps us remain agile and faithful in serving
-              communities, empowering the young, caring for the aged, and
+              helping us remain agile and faithful in serving communities —
+              empowering youth, caring for vulnerable groups and the aged, and
               advancing God’s mission through love and service.
             </p>
 
@@ -337,8 +312,8 @@ function Landing() {
 
           {/* Right donation card */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ y: 40 }}
+            whileInView={{ y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
             className="bg-white rounded-3xl shadow-xl p-8 sm:p-10 text-center"
@@ -368,6 +343,8 @@ function Landing() {
           </motion.div>
         </div>
       </section>
+
+      <Newsletter />
 
       <Footer />
     </>

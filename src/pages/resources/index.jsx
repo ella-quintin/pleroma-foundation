@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Helmet } from "react-helmet-async";
+import SEO from "../../components/seo";
 import {
   Download,
   FileText,
@@ -17,7 +17,6 @@ import {
   MailCheck,
   Leaf,
 } from "lucide-react";
-import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
 import reimage from "../../assets/images/reimage.jpg";
 
@@ -143,9 +142,7 @@ const Resources = () => {
     setSubscribing(false);
   };
 
-  // Initial load, then subscribe to Sanity's real-time listen API so any
-  // create/update/delete made in the Studio (including deletions) is
-  // reflected on the page immediately, without needing a manual refresh.
+
   useEffect(() => {
     fetchResources();
 
@@ -174,19 +171,17 @@ const Resources = () => {
 
   return (
     <>
-      <Navbar />
-      <Helmet>
-        <title>Resources | Pleroma Sycamore Foundation</title>
-        <meta
-          name="description"
-          content="Access reports, publications and other resources from Pleroma Sycamore Foundation to learn more about our work, impact and mission."
-        />
-      </Helmet>
+      <SEO
+        title="Reports & Resources | Pleroma Sycamore Foundation"
+        description="Browse annual reports, publications, and key documents from Pleroma Sycamore Foundation — our work, impact, and mission across Ghana."
+        path="/resources"
+        image={reimage}
+      />
 
       {/* Hero Section */}
       <motion.div
-        className="relative w-full h-64 bg-cover bg-center overflow-hidden mt-20"
-        style={{ backgroundImage: `url(${reimage})` }}
+        className="relative w-full h-64 bg-cover bg-center overflow-hidden"
+        style={{ backgroundImage: `url(${reimage})`, marginTop: "var(--nav-height)" }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
@@ -213,18 +208,12 @@ const Resources = () => {
       </motion.div>
 
       {/* Intro Section */}
-      <motion.div
-        className="py-16 px-4 sm:px-6 lg:px-12 bg-gray-100"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-      >
+      <div className="py-16 px-4 sm:px-6 lg:px-12 bg-gray-100">
         <div className="max-w-3xl mx-auto text-center">
           <motion.span
             className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#1D6205] bg-[#1D6205]/10 px-4 py-1.5 rounded-full mb-5"
-            initial={{ opacity: 0, y: -10 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ y: -10 }}
+            whileInView={{ y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
@@ -233,8 +222,8 @@ const Resources = () => {
           </motion.span>
           <motion.h2
             className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-4"
-            initial={{ y: -20, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
+            initial={{ y: -20 }}
+            whileInView={{ y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
@@ -242,8 +231,8 @@ const Resources = () => {
           </motion.h2>
           <motion.p
             className="text-gray-600 text-base sm:text-lg"
-            initial={{ y: 20, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
+            initial={{ y: 20 }}
+            whileInView={{ y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
           >
@@ -252,16 +241,10 @@ const Resources = () => {
             work across communities in Ghana.
           </motion.p>
         </div>
-      </motion.div>
+      </div>
 
       {/* Category Tabs + Resources */}
-      <motion.div
-        className="px-4 sm:px-8 lg:px-16 py-16 mb-16 bg-[#f9f9f9]"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-      >
+      <div className="px-4 sm:px-8 lg:px-16 py-16 mb-16 bg-[#f9f9f9]">
         <div className="max-w-7xl mx-auto">
           {/* Tabs */}
           <div className="flex flex-wrap justify-center gap-3 mb-14">
@@ -305,8 +288,8 @@ const Resources = () => {
           {!loading && categoryResources.length === 0 && (
             <motion.div
               className="flex flex-col items-center justify-center text-center py-24 px-6 bg-white rounded-3xl shadow-sm border border-gray-100"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ y: 20 }}
+              whileInView={{ y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
@@ -336,8 +319,8 @@ const Resources = () => {
                 {featuredResource && (
                   <motion.div
                     className="relative bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 mb-14 grid grid-cols-1 md:grid-cols-2 border border-gray-100"
-                    initial={{ opacity: 0, scale: 0.97 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
+                    initial={{ scale: 0.97 }}
+                    whileInView={{ scale: 1 }}
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
                   >
@@ -403,11 +386,12 @@ const Resources = () => {
                     {remainingResources.map((resource, index) => (
                       <motion.div
                         key={resource.slug?.current || `${resource.title}-${index}`}
-                        className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col border border-gray-100"
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
+                        className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-shadow duration-300 flex flex-col border border-gray-100"
+                        initial={{ scale: 0.95 }}
+                        whileInView={{ scale: 1 }}
                         transition={{ duration: 0.6, delay: index * 0.05 }}
                         viewport={{ once: true }}
+                        whileHover={{ y: -8 }}
                       >
                         <div className="relative">
                           {resource.thumbnail?.asset?.url ? (
@@ -466,7 +450,7 @@ const Resources = () => {
             )}
           </AnimatePresence>
         </div>
-      </motion.div>
+      </div>
 
       <div className="max-w-5xl mx-auto mt-24 mb-24 px-4 sm:px-0">
         <div
@@ -560,7 +544,7 @@ const Resources = () => {
                     onSubmit={handleSubscribe}
                     className="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-6 sm:p-7 shadow-xl"
                   >
-                    <div className="grid grid-cols-2 gap-3 mb-3">
+                    <div className="grid grid-cols-1 gap-3 mb-3">
                       <div className="relative">
                         <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                         <input

@@ -19,6 +19,22 @@ const fadeUp = (delay = 0) => ({
 const RecentBlogs = () => {
   const [posts, setPosts] = useState([]);
   const [activeTab, setActiveTab] = useState("story");
+  const [featuredPostId, setFeaturedPostId] = useState(null);
+
+  // Determine which post is currently the site-wide featured story on the
+  // What's New page, so cards for it link there instead of duplicating it
+  // on its own single-post page.
+  useEffect(() => {
+    client
+      .fetch(
+        `*[_type == "post"] | order(publishedAt desc){ _id, featured }`
+      )
+      .then((allPosts) => {
+        const featured = allPosts.find((p) => p.featured === true) || allPosts[0];
+        setFeaturedPostId(featured?._id ?? null);
+      })
+      .catch(console.error);
+  }, []);
 
   useEffect(() => {
     client
@@ -43,7 +59,7 @@ const RecentBlogs = () => {
         }
       )
       .then((data) => {
-      
+
         setPosts(data);
       })
       .catch(console.error);
@@ -164,7 +180,11 @@ const RecentBlogs = () => {
                   className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition duration-300 group"
                 >
                   <Link
-                    to={`/blog/${post.slug?.current}`}
+                    to={
+                      post._id === featuredPostId
+                        ? "/blog"
+                        : `/blog/${post.slug?.current}`
+                    }
                   >
                     <div className="overflow-hidden">
                       <img
@@ -220,7 +240,7 @@ const RecentBlogs = () => {
               className="text-center mt-12"
             >
               <Link
-                to="/blog"
+                to={`/blog?tab=${activeTab}#more`}
                 className="inline-block bg-[#1D6205] text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-2xl transition hover:bg-[#155304]"
               >
                 {activeTab === "story"

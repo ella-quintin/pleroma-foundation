@@ -1,13 +1,36 @@
 import { MapPin, Phone, Mail } from 'lucide-react';
 import contact from "../../assets/images/contact.jpg";
-import Navbar from '../../components/navbar';
-import { Helmet } from "react-helmet-async";
-import { useState, useEffect } from "react";
+import SEO from "../../components/seo";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
 import Footer from '../../components/footer';
 
 const Contact = () => {
   const [showScrollButton, setShowScrollButton] = useState(false);
+  const formRef = useRef(null);
+  const [sendState, setSendState] = useState("idle"); // idle | sending | success | error
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSendState("sending");
+
+    emailjs
+      .sendForm(
+        "service_rid8tfh",
+        "template_w1830sh",
+        formRef.current,
+        "w0GfeCN8k1_stJidz"
+      )
+      .then(() => {
+        setSendState("success");
+        formRef.current.reset();
+      })
+      .catch((error) => {
+        console.error(error);
+        setSendState("error");
+      });
+  };
 
   // Handle scroll events to toggle button visibility
   useEffect(() => {
@@ -33,17 +56,16 @@ const Contact = () => {
 
   return (
     <>
-      <Navbar />
-      <Helmet>
-        <title>Contact Us | Pleroma Sycamore Foundation – Faith-Based NGO in Ghana</title>
-        <meta
-          name="description"
-          content="Contact Pleroma Sycamore Foundation, a faith-based NGO in Ghana. Reach out for partnerships, support, prayer, or community initiatives."
-        />
-      </Helmet>
+      <SEO
+        title="Contact Us | Pleroma Sycamore Foundation"
+        description="Get in touch with Pleroma Sycamore Foundation in Accra, Ghana — for partnerships, support, prayer requests, or community initiatives."
+        path="/contact-us"
+        image={contact}
+      />
 
       <motion.div
-        className="bg-gray-50 mt-20 overflow-x-hidden"
+        className="bg-gray-50 overflow-x-hidden"
+        style={{ marginTop: "var(--nav-height)" }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
@@ -58,12 +80,12 @@ const Contact = () => {
         >
           <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center">
             <motion.h1
-              className="text-white text-4xl font-bold"
+              className="text-white text-2xl sm:text-3xl lg:text-4xl font-bold text-center"
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.6 }}
             >
-              Contact Pleroma Sycamore Foundation
+              Contact Us
             </motion.h1>
           </div>
         </motion.section>
@@ -78,8 +100,8 @@ const Contact = () => {
           <div className="grid md:grid-cols-2 gap-10">
             {/* Contact Information */}
             <motion.div
-              initial={{ x: -50, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
+              initial={{ x: -50 }}
+              whileInView={{ x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
@@ -112,7 +134,7 @@ const Contact = () => {
                   <p className="text-sm sm:text-base text-black">
                     <span className="font-bold text-black">Email:</span>{" "}
                     <a
-                      href="mailto:info@pleroma-scycamore.org"
+                      href="mailto:info@pleroma-sycamore.org"
                       className="hover:underline text-black"
                     >
                       info@pleroma-sycamore.org
@@ -124,12 +146,16 @@ const Contact = () => {
 
             {/* Contact Form */}
             <motion.div
-              initial={{ x: 50, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
+              initial={{ x: 50 }}
+              whileInView={{ x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <form className="bg-gray-100 p-6 rounded-lg shadow-md mb-16">
+              <form
+                ref={formRef}
+                onSubmit={handleSubmit}
+                className="bg-gray-100 p-6 rounded-lg shadow-md mb-16"
+              >
                 <div className="mb-4">
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                     Name
@@ -137,7 +163,8 @@ const Contact = () => {
                   <input
                     type="text"
                     id="name"
-                    name="name"
+                    name="user_name"
+                    required
                     className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-[#1D6205] focus:border-[#1D6205]"
                   />
                 </div>
@@ -148,7 +175,19 @@ const Contact = () => {
                   <input
                     type="email"
                     id="email"
-                    name="email"
+                    name="user_email"
+                    required
+                    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-[#1D6205] focus:border-[#1D6205]"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+                    Phone <span className="text-gray-400 font-normal">(optional)</span>
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="user_phone"
                     className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-[#1D6205] focus:border-[#1D6205]"
                   />
                 </div>
@@ -160,15 +199,28 @@ const Contact = () => {
                     id="message"
                     name="message"
                     rows="4"
+                    required
                     className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-[#1D6205] focus:border-[#1D6205]"
                   ></textarea>
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-[#1D6205] text-white py-2 px-4 rounded-md hover:bg-green-700"
+                  disabled={sendState === "sending"}
+                  className="w-full bg-[#1D6205] text-white py-2 px-4 rounded-md hover:bg-green-700 disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
                 >
-                  Send Message
+                  {sendState === "sending" ? "Sending…" : "Send Message"}
                 </button>
+
+                {sendState === "success" && (
+                  <p className="mt-3 text-sm text-center text-[#1D6205] font-medium">
+                    Thank you — your message has been sent. We'll get back to you soon.
+                  </p>
+                )}
+                {sendState === "error" && (
+                  <p className="mt-3 text-sm text-center text-red-600 font-medium">
+                    Something went wrong. Please try again, or email us directly.
+                  </p>
+                )}
               </form>
             </motion.div>
           </div>

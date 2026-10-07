@@ -1,27 +1,17 @@
-import Navbar from "../../components/navbar";
-import { Helmet } from "react-helmet-async";
-import { Briefcase, Heart, Users, Book, Video, PersonStanding, Baby, BookOpen, Soup, GraduationCap } from "lucide-react";
-import boy from "../../assets/boy.jpg";
-import man from "../../assets/man.jpg";
+import SEO from "../../components/seo";
+import { ArrowRight } from "lucide-react";
 import hands from "../../assets/images/hands.jpg";
 import womanTwo from "../../assets/images/womanTwo.jpg";
-import womanSelling from "../../assets/images/womanSelling.jpg";
-import youth from "../../assets/images/youth.png";
-import children from "../../assets/images/children.jpg";
-import bible from "../../assets/images/bible.jpg";
-import leadership from "../../assets/images/leadership.jpg";
-import helping from "../../assets/images/helping.jpg";
-import food from "../../assets/images/food.jpg";
-import media from "../../assets/images/media.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useRef } from "react";
 import { useState, useEffect } from "react";
 import Footer from "../../components/footer";
+import { programs } from "../../data/programs";
 
 const HowWeWork = () => {
   const programsRef = useRef(null);
@@ -48,84 +38,23 @@ const HowWeWork = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const programs = [
-    {
-      id: 1,
-      title: "Kingdom Entrepreneurs & Youth Empowerment",
-      subtitle: "MSCEDP + Y4J + Sow & Grow",
-      description:
-        "Integrates entrepreneurship, discipleship, mentorship, and seed support so young people become spiritually grounded and economically productive Kingdom builders.",
-      target:
-        "100 trained per cohort, 50 active enterprises, strong discipleship retention.",
-      icon: <Briefcase className="w-10 h-10 text-[#1D6205] mr-4" />,
-      image: womanSelling,
-    },
-
-    {
-      id: 2,
-      title: "The Sycamore Institute",
-      subtitle: "Leadership + Evangelism + Ministerial Support",
-      description:
-        "Forms leaders, mobilises evangelists, and sustains pastors, missionaries, and ministry workers across the full ministerial lifecycle.",
-      target:
-        "150+ leaders formed, 100 evangelists trained, 30 ministers supported annually.",
-      icon: <Book className="w-10 h-10 text-[#1D6205] mr-4" />,
-      image: leadership,
-    },
-
-    {
-      id: 3,
-      title: "The Compassion Table",
-      subtitle: "Senior Care + Nourishment + Community Outreach",
-      description:
-        "Combines elder care and soup kitchen outreach to serve overlooked people with dignity, practical support, and community-based compassion.",
-      target:
-        "30 elders in care, 5,000 meals annually, 50 trained volunteers.",
-      icon: <Heart className="w-10 h-10 text-[#1D6205] mr-4" />,
-      image: helping,
-    },
-
-    {
-      id: 4,
-      title: "Prof. E.V. Doku Academic Excellence Initiative",
-      subtitle: "Education Fund + Bridges to Brilliance",
-      description:
-        "Provides scholarships, mentorship, skills-building, and advocacy so gifted but economically constrained students can thrive and contribute to Ghana's future.",
-      target:
-        "20 scholars supported annually, 90% completion, full mentorship coverage.",
-      icon: <GraduationCap className="w-10 h-10 text-[#1D6205] mr-4" />,
-      image: youth,
-    },
-
-    {
-      id: 5,
-      title: "Children for Jesus (C4J)",
-      subtitle: "Faith, Character & Leadership Formation",
-      description:
-        "Builds the spiritual and moral foundation of children while training teachers and volunteers who shape the next generation.",
-      target:
-        "500 children reached by Year 5, 30 teachers trained annually, strong safeguarding compliance.",
-      icon: <Baby className="w-10 h-10 text-[#1D6205] mr-4" />,
-      image: children,
-    },
-  ];
-
   return (
     <>
-      <Navbar />
-      <Helmet>
-        <title>What We Do | Faith-Based NGO Programs in Ghana – Pleroma Sycamore Foundation</title>
-        <meta
-          name="description"
-          content="Discover how Pleroma Sycamore Foundation, a faith-based NGO in Ghana, delivers community development, youth empowerment, Christian outreach, leadership training, and social support programs."
-        />
-      </Helmet>
+      {/* Canonical always points to /how-we-do-it: this component also
+          serves /how-we-work (kept live on purpose), and a single canonical
+          URL stops search engines treating the two as duplicate content. */}
+      <SEO
+        title="What We Do | Pleroma Sycamore Foundation"
+        description="See how Pleroma Sycamore Foundation delivers community development, youth empowerment, Christian outreach, and social support programs across Ghana."
+        path="/how-we-do-it"
+        image={womanTwo}
+      />
 
 
       {/* Header Section */}
       <motion.div
-        className="relative w-full h-64 bg-cover bg-center overflow-hidden mt-20"
-        style={{ backgroundImage: `url(${womanTwo})` }}
+        className="relative w-full h-64 bg-cover bg-center overflow-hidden"
+        style={{ backgroundImage: `url(${womanTwo})`, marginTop: "var(--nav-height)" }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
@@ -137,7 +66,7 @@ const HowWeWork = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6 }}
           >
-            How We Work
+            What We Do
           </motion.h1>
         </div>
       </motion.div>
@@ -150,21 +79,18 @@ const HowWeWork = () => {
       >
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <motion.div
-            initial={{ x: -50, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
+            initial={{ x: -50 }}
+            whileInView={{ x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-4">
-              Guided by the Holy Spirit
+              Led by Compassion and Purpose
             </h2>
             <p className="text-gray-600 text-base sm:text-lg mb-6">
-              <p className="text-gray-600 text-base sm:text-lg mb-6">
-                As a faith-based nonprofit organization in Ghana, we believe in spirit-led
-                partnerships that result in impactful programs addressing spiritual,
-                social, and economic needs within communities.
-              </p>
-
+              As a faith-based nonprofit organization in Ghana, we believe in spirit-led
+              partnerships that result in impactful programs addressing spiritual,
+              social, and economic needs within communities.
             </p>
             <ul className="list-disc pl-5 space-y-2 text-gray-600 text-sm sm:text-base">
               <li>Supporting Christian businesses through entrepreneurship development.</li>
@@ -176,8 +102,8 @@ const HowWeWork = () => {
           </motion.div>
           <motion.div
             className="flex justify-center"
-            initial={{ scale: 0.9, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
+            initial={{ scale: 0.9 }}
+            whileInView={{ scale: 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
@@ -191,18 +117,13 @@ const HowWeWork = () => {
       </motion.div>
 
 
-      <motion.div
-        className="px-4 sm:px-8 lg:px-16 py-10 mb-16 bg-[#f9f9f9]"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-      >
+      <div className="px-4 sm:px-8 lg:px-16 py-10 mb-16 bg-[#f9f9f9]">
         <div ref={programsRef} id="programs" className="py-8">
 
           <motion.h2
             className="text-[#1D6205] font-bold text-2xl sm:text-3xl lg:text-4xl mb-12 text-center"
-            initial={{ y: -20, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
+            initial={{ y: -20 }}
+            whileInView={{ y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
@@ -222,8 +143,8 @@ const HowWeWork = () => {
             className="max-w-full mx-auto  pb-10"
           >
             {programs.map((program) => (
-              <SwiperSlide key={program.id}>
-                <motion.div
+              <SwiperSlide key={program.id} style={{ height: "auto" }}>
+                <div
                   className="
               bg-white
                 rounded-3xl
@@ -235,14 +156,11 @@ const HowWeWork = () => {
                 duration-300
                 flex
                 flex-col
+                h-full
                 mb-8
-              
+
                 mx-auto
                 "
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6 }}
-                  viewport={{ once: true }}
                 >
 
                   {/* Image Section */}
@@ -262,47 +180,42 @@ const HowWeWork = () => {
                   </div>
 
                   {/* Content */}
-                  <div className="p-6 flex flex-col flex-grow">
+                  <div className="p-7 flex flex-col flex-grow text-center">
 
-                    {/* Icon */}
-                    <div className="text-center mb-5">
-
-
-                      <h3 className="font-bold text-xl text-gray-900 leading-tight">
+                    <div className="min-h-[72px]">
+                      <h3 className="font-bold text-lg text-gray-900 leading-snug line-clamp-2">
                         {program.title}
                       </h3>
 
-                      <p className="text-[#1D6205] font-semibold mt-2 text-sm">
-                        {program.subtitle}
+                      <p className="text-[#1D6205] text-sm font-medium mt-1 line-clamp-1">
+                        {program.tagline}
                       </p>
-
                     </div>
 
                     {/* Description */}
-                    <p className="text-gray-600 leading-relaxed text-sm flex-grow">
-                      {program.description}
+                    <p className="text-gray-600 leading-relaxed text-sm mt-4 line-clamp-3 min-h-[66px]">
+                      {program.intro[0]}
                     </p>
 
-                    {/* Target Outcomes */}
-                    <div className="mt-6 bg-[#1D6205]/5 border border-[#1D6205]/15 rounded-xl p-4">
-                      <h4 className="font-bold text-[#1D6205] mb-2">
-                        Target Outcomes
-                      </h4>
-
-                      <p className="text-sm text-gray-700 leading-relaxed">
-                        {program.target}
-                      </p>
+                    <div className="mt-5 pt-5 border-t border-gray-100">
+                      <Link
+                        to={`/our-programs/${program.slug}`}
+                        className="inline-flex items-center gap-1.5 text-[#1D6205] font-semibold text-sm hover:underline group"
+                      >
+                        Read More
+                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+                      </Link>
                     </div>
 
                   </div>
 
-                </motion.div>
+                </div>
               </SwiperSlide>
             ))}
           </Swiper>
 
         </div>
-      </motion.div>
+      </div>
 
 
 

@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
-import { Menu, X, ChevronDown, Mail, Phone } from "lucide-react";
+import { Menu, X, ChevronDown, Mail, Phone, Megaphone, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { client } from "../../lib/sanity";
 
 /* ------------------------------------------------------------------ */
 /*  Brand tokens (unchanged brand colors, only reused consistently)    */
@@ -19,8 +20,11 @@ const NAV_ITEMS = [
     type: "dropdown",
     key: "about",
     label: "About Us",
-    isActive: (pathname) =>
-      pathname === "/who-we-are" || pathname === "/how-we-do-it",
+    // "#programs" on this same route belongs to the separate "Our Programs"
+    // nav item below, so it must not also light up "About Us".
+    isActive: (pathname, hash) =>
+      pathname === "/who-we-are" ||
+      (pathname === "/how-we-do-it" && hash !== "#programs"),
     children: [
       { label: "Who We Are", path: "/who-we-are" },
       {
@@ -41,7 +45,7 @@ const NAV_ITEMS = [
     type: "dropdown",
     key: "grants",
     label: "Grants & Donations",
-    isActive: (pathname) => pathname === "/grants-application",
+    isActive: (pathname, hash) => pathname === "/grants-application",
     children: [
       { label: "Apply for a Grant", path: "/grants-application" },
       { label: "Donate to Support", path: "/donate" },
@@ -101,17 +105,71 @@ const Navbar = () => {
   const [openDropdown, setOpenDropdown] = useState(null); // desktop hover/click
   const [openMobileAccordion, setOpenMobileAccordion] = useState(null); // mobile drawer
   const [isMobile, setIsMobile] = useState(
-    typeof window !== "undefined" ? window.innerWidth < 768 : false
+    typeof window !== "undefined" ? window.innerWidth < 1280 : false
   );
   const [isScrolled, setIsScrolled] = useState(false);
+  const [announcement, setAnnouncement] = useState(null);
+  const [featuredSlug, setFeaturedSlug] = useState(null);
 
   const timersRef = useRef({});
   const desktopNavRef = useRef(null);
   const drawerRef = useRef(null);
+  const navRef = useRef(null);
+
+  /* ---------------- Active announcement banner ---------------- */
+  useEffect(() => {
+    client
+      .fetch(
+        `*[_type == "announcement" && isActive == true] | order(_updatedAt desc)[0]{
+          message,
+          buttonLabel,
+          buttonLink
+        }`
+      )
+      .then(setAnnouncement)
+      .catch(console.error);
+  }, []);
+
+  /* ---------------- Which post is currently featured on What's New ---------------- */
+  // Mirrors the selection rule used on the What's New page: GROQ's ordering is
+  // unreliable when sorting a field (featured) that's missing on most
+  // documents, so the manual-override selection happens here instead.
+  useEffect(() => {
+    client
+      .fetch(
+        `*[_type == "post"] | order(publishedAt desc){ _id, "slug": slug.current, featured }`
+      )
+      .then((allPosts) => {
+        const featured = allPosts.find((p) => p.featured === true) || allPosts[0];
+        setFeaturedSlug(featured?.slug ?? null);
+      })
+      .catch(console.error);
+  }, []);
+
+  /* ---------------- Keep --nav-height in sync with real rendered height ---------------- */
+  useEffect(() => {
+    const el = navRef.current;
+    if (!el) return;
+
+    const setHeight = () => {
+      document.documentElement.style.setProperty("--nav-height", `${el.offsetHeight}px`);
+    };
+
+    setHeight();
+
+    const observer = new ResizeObserver(setHeight);
+    observer.observe(el);
+    window.addEventListener("resize", setHeight);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", setHeight);
+    };
+  }, [announcement, isScrolled]);
 
   /* ---------------- Responsive breakpoint tracking ---------------- */
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    const handleResize = () => setIsMobile(window.innerWidth < 1280);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -211,31 +269,80 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50">
+    <nav ref={navRef} className="fixed top-0 left-0 w-full z-50">
       {/* ---------------------------------------------------------------- */}
-      {/* Top contact bar                                                  */}
+      {/* Top bar — announcement banner (when active) or contact info      */}
       {/* ---------------------------------------------------------------- */}
-      <div
-        className="hidden sm:block text-white text-xs sm:text-sm font-medium tracking-wide"
-        style={{ backgroundColor: PRIMARY }}
-      >
-        <div className="w-full px-5 sm:px-8 lg:px-12 py-2 flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-x-8 gap-y-1">
-          <a
-            href="mailto:info@pleroma-sycamore.org"
-            className="flex items-center gap-1.5 hover:text-white/80 transition-colors duration-200"
-          >
-            <Mail className="w-3.5 h-3.5" strokeWidth={2} />
-            <span>info@pleroma-sycamore.org</span>
-          </a>
-          <a
-            href="tel:+233597395719"
-            className="flex items-center gap-1.5 hover:text-white/80 transition-colors duration-200"
-          >
-            <Phone className="w-3.5 h-3.5" strokeWidth={2} />
-            <span>+233-302-905659 &nbsp;|&nbsp; +233-597-395719</span>
-          </a>
+      {announcement ? (
+        <div
+          className="text-white text-xs sm:text-sm font-medium tracking-wide"
+          style={{ backgroundColor: PRIMARY }}
+        >
+          {(() => {
+            // If the banner links straight to a post that is currently the
+            // featured story on What's New, send people there instead — it
+            // shows that same story in its full featured treatment, so a
+            // direct link to its single-post page would just be a duplicate.
+            const featuredPostPath = featuredSlug ? `/blog/${featuredSlug}` : null;
+            const rawLink = announcement.buttonLink;
+            const resolvedLink =
+              rawLink && featuredPostPath && rawLink === featuredPostPath
+                ? "/blog"
+                : rawLink;
+
+            const hasLink = Boolean(resolvedLink);
+            const isExternal = hasLink && resolvedLink.startsWith("http");
+            const Wrapper = hasLink ? (isExternal ? "a" : Link) : "div";
+            const wrapperProps = hasLink
+              ? isExternal
+                ? { href: resolvedLink, target: "_blank", rel: "noopener noreferrer" }
+                : { to: resolvedLink }
+              : {};
+
+            return (
+              <Wrapper
+                {...wrapperProps}
+                className={`flex items-center gap-2 w-full px-5 sm:px-8 lg:px-12 py-2 lg:justify-center ${
+                  hasLink ? "hover:bg-black/10 transition-colors duration-200" : ""
+                }`}
+              >
+                <Megaphone className="w-3.5 h-3.5 flex-shrink-0" strokeWidth={2} />
+                <span className="flex-1 lg:flex-initial min-w-0 truncate lg:whitespace-normal lg:overflow-visible">
+                  {announcement.message}
+                </span>
+                {hasLink && announcement.buttonLabel && (
+                  <span className="hidden lg:inline underline underline-offset-2 font-semibold whitespace-nowrap flex-shrink-0 ml-2">
+                    {announcement.buttonLabel}
+                  </span>
+                )}
+                {hasLink && <ArrowRight className="w-3.5 h-3.5 flex-shrink-0" />}
+              </Wrapper>
+            );
+          })()}
         </div>
-      </div>
+      ) : (
+        <div
+          className="hidden sm:block text-white text-xs sm:text-sm font-medium tracking-wide"
+          style={{ backgroundColor: PRIMARY }}
+        >
+          <div className="w-full px-5 sm:px-8 lg:px-12 py-2 flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-x-8 gap-y-1">
+            <a
+              href="mailto:info@pleroma-sycamore.org"
+              className="flex items-center gap-1.5 hover:text-white/80 transition-colors duration-200"
+            >
+              <Mail className="w-3.5 h-3.5" strokeWidth={2} />
+              <span>info@pleroma-sycamore.org</span>
+            </a>
+            <a
+              href="tel:+233597395719"
+              className="flex items-center gap-1.5 hover:text-white/80 transition-colors duration-200"
+            >
+              <Phone className="w-3.5 h-3.5" strokeWidth={2} />
+              <span>+233-302-905659 &nbsp;|&nbsp; +233-597-395719</span>
+            </a>
+          </div>
+        </div>
+      )}
 
       {/* ---------------------------------------------------------------- */}
       {/* Main navbar                                                      */}
@@ -263,7 +370,7 @@ const Navbar = () => {
           {/* Desktop navigation */}
           <div
             ref={desktopNavRef}
-            className="hidden md:flex md:items-center md:gap-3 lg:gap-6 xl:gap-8"
+            className="hidden xl:flex xl:items-center xl:gap-6 2xl:gap-8"
           >
             {NAV_ITEMS.map((item) =>
               item.type === "link" ? (
@@ -295,7 +402,7 @@ const Navbar = () => {
                     onClick={() => toggleDropdown(item.key)}
                     aria-haspopup="true"
                     aria-expanded={openDropdown === item.key}
-                    className={`relative flex items-center gap-1 px-3 py-2 text-[15px] font-medium tracking-[0.01em] transition-colors duration-200 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1D6205]/40 rounded-md ${item.isActive(location.pathname)
+                    className={`relative flex items-center gap-1 px-3 py-2 text-[15px] font-medium tracking-[0.01em] transition-colors duration-200 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1D6205]/40 rounded-md ${item.isActive(location.pathname, location.hash)
                         ? "text-[#1D6205] font-semibold"
                         : "text-gray-700 hover:text-[#1D6205]"
                       }`}
@@ -306,7 +413,7 @@ const Navbar = () => {
                         }`}
                     />
                     <span
-                      className={`pointer-events-none absolute left-3 right-3 -bottom-0.5 h-[2px] rounded-full bg-[#1D6205] origin-left transition-transform duration-300 ease-out ${item.isActive(location.pathname)
+                      className={`pointer-events-none absolute left-3 right-3 -bottom-0.5 h-[2px] rounded-full bg-[#1D6205] origin-left transition-transform duration-300 ease-out ${item.isActive(location.pathname, location.hash)
                           ? "scale-x-100"
                           : "scale-x-0 group-hover:scale-x-100"
                         }`}
@@ -351,7 +458,7 @@ const Navbar = () => {
             onClick={() => setIsMenuOpen(true)}
             aria-label="Open navigation menu"
             aria-expanded={isMenuOpen}
-            className="md:hidden flex items-center justify-center w-10 h-10 rounded-full text-gray-800 hover:bg-gray-50 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1D6205]/40"
+            className="xl:hidden flex items-center justify-center w-10 h-10 rounded-full text-gray-800 hover:bg-gray-50 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1D6205]/40"
           >
             <Menu className="w-6 h-6" strokeWidth={1.75} />
           </button>
@@ -370,7 +477,7 @@ const Navbar = () => {
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="fixed inset-0 z-40 bg-gray-900/40 backdrop-blur-sm md:hidden"
+              className="fixed inset-0 z-40 bg-gray-900/40 backdrop-blur-sm xl:hidden"
               aria-hidden="true"
             />
             <motion.div
@@ -383,7 +490,7 @@ const Navbar = () => {
               role="dialog"
               aria-modal="true"
               aria-label="Mobile navigation"
-              className="fixed top-0 right-0 z-50 h-screen w-[85%] max-w-sm bg-white rounded-l-3xl shadow-2xl md:hidden flex flex-col"
+              className="fixed top-0 right-0 z-50 h-screen w-[85%] max-w-sm bg-white rounded-l-3xl shadow-2xl xl:hidden flex flex-col"
             >
               {/* Drawer header */}
               <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
@@ -420,7 +527,7 @@ const Navbar = () => {
                         onClick={() => toggleMobileAccordion(item.key)}
                         aria-haspopup="true"
                         aria-expanded={openMobileAccordion === item.key}
-                        className={`w-full flex items-center justify-between rounded-xl px-4 py-3.5 text-[15px] font-medium transition-colors duration-200 focus:outline-none ${item.isActive(location.pathname)
+                        className={`w-full flex items-center justify-between rounded-xl px-4 py-3.5 text-[15px] font-medium transition-colors duration-200 focus:outline-none ${item.isActive(location.pathname, location.hash)
                             ? "text-[#1D6205] bg-[#1D6205]/5 font-semibold"
                             : "text-gray-800 hover:bg-gray-50 hover:text-[#1D6205]"
                           }`}

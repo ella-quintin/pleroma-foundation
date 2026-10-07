@@ -1,35 +1,11 @@
 
-import emailjs from "@emailjs/browser";
-import { useRef } from "react";
-import { Instagram, Facebook, Twitter, Linkedin } from 'lucide-react';
+import { Instagram, Facebook, Linkedin } from 'lucide-react';
 import { MapPin, Phone, Mail } from 'lucide-react';
+import { Link } from "react-router-dom";
+import { programs } from "../../data/programs";
 
 
 const Footer = () => {
-  const form = useRef();
-
-  const sendEmail = (e) => {
-    e.preventDefault();
-
-    emailjs
-      .sendForm(
-        "service_rid8tfh",
-        "template_w1830sh",
-        form.current,
-        "w0GfeCN8k1_stJidz"
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-          alert("Message sent successfully!");
-        },
-        (error) => {
-          console.log(error.text);
-          alert("Failed to send message. Please try again later.");
-        }
-      );
-  };
-
   return (
     <footer className="bg-[#1D6205] text-white py-12 pt-16 overflow-hidden">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 px-4 sm:px-6 md:px-8">
@@ -41,9 +17,9 @@ const Footer = () => {
           </p>
           <h3 className="text-lg text-left font-bold mb-3">Social Media</h3>
           <div className="mt-4 flex text-left space-x-4">
-            <a href=" https://www.instagram.com/pleromasycamorefoundation?igsh=ZDg0NW1yMXRwbmd4" className="hover:text-gray-300"><Instagram size={20} /></a>
-            <a href=" https://www.facebook.com/share/18gTCwEYJ3/?mibextid=wwXIfr" className="hover:text-gray-300"><Facebook size={20} /></a>
-            <a href="https://www.linkedin.com/in/pleroma-sycamore-foundation-108011406?utm_source=share_via&utm_content=profile&utm_medium=member_ios" className="hover:text-gray-300"><Linkedin size={20} /></a>
+            <a href="https://www.instagram.com/pleromasycamorefoundation?igsh=ZDg0NW1yMXRwbmd4" className="hover:text-gray-300" aria-label="Visit our Instagram page"><Instagram size={20} /></a>
+            <a href="https://www.facebook.com/share/18gTCwEYJ3/?mibextid=wwXIfr" className="hover:text-gray-300" aria-label="Visit our Facebook page"><Facebook size={20} /></a>
+            <a href="https://www.linkedin.com/in/pleroma-sycamore-foundation-108011406?utm_source=share_via&utm_content=profile&utm_medium=member_ios" className="hover:text-gray-300" aria-label="Visit our LinkedIn page"><Linkedin size={20} /></a>
           </div>
         </div>
 
@@ -55,14 +31,14 @@ const Footer = () => {
               {[
                 { name: "Home", path: "/" },
                 { name: "Who We Are", path: "/who-we-are" },
-                { name: "How We Work", path: "/how-we-work" },
-                { name: "What's New", path: "/whats-new" },
+                { name: "What We Do", path: "/how-we-work" },
+                { name: "What's New", path: "/blog" },
                 { name: "Contact Us", path: "/contact-us" },
               ].map((link, idx) => (
                 <li key={idx}>
-                  <a href={link.path} className="hover:underline hover:text-gray-200">
+                  <Link to={link.path} className="hover:underline hover:text-gray-200">
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -73,12 +49,17 @@ const Footer = () => {
         <div className="flex flex-col text-left">
           <div className="mb-6">
             <h3 className="text-lg font-bold mb-4">Our Programs</h3>
-            <ul className="space-y-3 text-sm font-thin text-white hover:text-gray-100">
-              <li>Kingdom Entrepreneurs & Youth Empowerment</li>
-              <li>The Sycamore Institute</li>
-              <li>The Compassion Table</li>
-              <li>Prof. E.V. Doku Academic Excellence Initiative</li>
-              <li>Children for Jesus (C4J)</li>
+            <ul className="space-y-3 text-sm font-thin text-white">
+              {programs.map((program) => (
+                <li key={program.slug}>
+                  <Link
+                    to={`/our-programs/${program.slug}`}
+                    className="hover:underline hover:text-gray-200"
+                  >
+                    {program.title}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -104,7 +85,7 @@ const Footer = () => {
                 <p className="text-sm sm:text-base text-white hover:text-gray-100">
                   <span className="font-normal text-white">Email:</span>{" "}
                   <a
-                    href="mailto:info@pleroma-scycamore.org"
+                    href="mailto:info@pleroma-sycamore.org"
                     className="hover:underline text-white hover:text-gray-200"
                   >
                     info@pleroma-sycamore.org
@@ -115,50 +96,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Contact Form
-        <div className="flex flex-col items-center md:items-start">
-          <h3 className="text-base font-bold mb-4">Contact Us</h3>
-          <form
-            ref={form}
-            onSubmit={sendEmail}
-            className="space-y-4 w-full max-w-sm bg-white p-4 rounded-lg shadow-md"
-          >
-            <input
-              type="text"
-              name="user_name"
-              placeholder="Your Name"
-              required
-              className="w-full p-2 md:p-3 bg-gray-50 text-gray-900 placeholder-gray-400 rounded focus:outline-none"
-            />
-            <input
-              type="email"
-              name="user_email"
-              placeholder="Email"
-              required
-              className="w-full p-2 md:p-3 bg-gray-50 text-gray-900 placeholder-gray-400 rounded focus:outline-none"
-            />
-            <input
-              type="text"
-              name="user_phone"
-              placeholder="Phone"
-              required
-              className="w-full p-2 md:p-3 bg-gray-50 text-gray-900 placeholder-gray-400 rounded focus:outline-none"
-            />
-            <textarea
-              name="message"
-              placeholder="Message"
-              rows="4"
-              required
-              className="w-full p-2 md:p-3 bg-gray-50 text-gray-900 placeholder-gray-400 rounded focus:outline-none"
-            />
-            <button
-              type="submit"
-              className="w-full p-2 md:p-3 bg-green-600 text-white font-semibold rounded hover:bg-green-700"
-            >
-              Send Message
-            </button>
-          </form>
-        </div> */}
       </div>
 
       {/* Footer Bottom */}

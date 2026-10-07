@@ -1,15 +1,23 @@
 import React from "react";
-import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
+import SEO from "../../components/seo";
 import { Heart } from "lucide-react";
 import { motion } from "framer-motion";
 
 const DonationSuccess = () => {
     return (
         <>
-            <Navbar />
+            <SEO
+                title="Thank You | Pleroma Sycamore Foundation"
+                description="Thank you for your generous donation to Pleroma Sycamore Foundation."
+                path="/donation-successful"
+                noindex
+            />
 
-            <div className="relative min-h-[80vh] pt-40 pb-12 flex items-center justify-center bg-gray-50 px-4 sm:px-6 overflow-hidden">
+            <div
+                className="relative min-h-[80vh] pb-12 flex items-center justify-center bg-gray-50 px-4 sm:px-6 overflow-hidden"
+                style={{ paddingTop: "calc(var(--nav-height) + 2.5rem)" }}
+            >
                 
                 {/* Decorative soft glow */}
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(29,98,5,0.08),transparent_60%)] pointer-events-none" />

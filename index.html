@@ -3,12 +3,11 @@
   <head>
     <meta charset="UTF-8" />
 
-    <!-- Primary SEO -->
-    <title>Pleroma Sycamore Foundation | Faith-Based NGO in Ghana</title>
-    <meta
-      name="description"
-      content="Pleroma Sycamore Foundation is a faith-based NGO in Ghana dedicated to community development, youth empowerment, Christian outreach, and social transformation."
-    />
+    <!-- Primary SEO: no static <title>/<meta description> here — every route
+         renders its own via src/components/seo, and react-helmet-async only
+         replaces tags it rendered itself. A static tag here would never get
+         removed and would sit duplicated alongside the per-page one. -->
+    <title>Pleroma Sycamore Foundation</title>
 
     <!-- Viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,9 +15,35 @@
     <!-- Favicon -->
     <link rel="icon" href="/favicon.png" />
 
-    <!-- Indexing -->
-    <meta name="robots" content="index, follow" />
-    <meta name="googlebot" content="index, follow" />
+    <!-- Indexing: no static <meta name="robots"> here — src/components/seo
+         renders one on every route (same reasoning as the title/description
+         above: a static one here would never get replaced and would sit
+         duplicated, which is exactly how a stray "index, follow" ended up
+         overriding a page's own noindex). -->
+
+    <!-- Organization structured data (JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "NGO",
+        "name": "Pleroma Sycamore Foundation",
+        "url": "%VITE_SITE_URL%",
+        "logo": "%VITE_SITE_URL%/favicon.png",
+        "email": "info@pleroma-sycamore.org",
+        "telephone": "+233-302-905659",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "4 Naa Botwey Street, Mabey",
+          "addressLocality": "Haatso, Accra",
+          "addressCountry": "GH"
+        },
+        "sameAs": [
+          "https://www.instagram.com/pleromasycamorefoundation",
+          "https://www.facebook.com/share/18gTCwEYJ3/?mibextid=wwXIfr",
+          "https://www.linkedin.com/in/pleroma-sycamore-foundation-108011406"
+        ]
+      }
+    </script>
   </head>
 
   <body>

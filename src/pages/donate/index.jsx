@@ -1,6 +1,6 @@
 import React from "react";
-import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
+import SEO from "../../components/seo";
 import donate from "../../assets/images/donate.jpg";
 import { motion } from "framer-motion";
 import { ShieldCheck, HeartHandshake, Users } from "lucide-react";
@@ -38,10 +38,16 @@ const Donate = () => {
 
     return (
         <>
-            <Navbar />
+            <SEO
+                title="Donate | Pleroma Sycamore Foundation"
+                description="Donate to Pleroma Sycamore Foundation, a Christian NGO in Ghana, and help fund youth empowerment, elder care, and community programs."
+                path="/donate"
+                image={donate}
+            />
 
             <motion.div
-                className="bg-gray-50 mt-20 overflow-x-hidden relative"
+                className="bg-white overflow-x-hidden relative"
+                style={{ marginTop: "var(--nav-height)" }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8 }}
@@ -123,7 +129,7 @@ const Donate = () => {
                         animate="show"
                         className="grid grid-cols-1 md:grid-cols-3 gap-8"
                     >
-                        <div className="bg-white rounded-2xl p-8 shadow-md text-center">
+                        <div className="bg-gray-100 rounded-2xl p-8 shadow-md text-center">
                             <ShieldCheck className="mx-auto text-[#1D6205] mb-4" size={40} />
                             <h4 className="text-xl font-semibold text-gray-800 mb-2">
                                 Secure Giving
@@ -134,7 +140,7 @@ const Donate = () => {
                             </p>
                         </div>
 
-                        <div className="bg-white rounded-2xl p-8 shadow-md text-center">
+                        <div className="bg-gray-100 rounded-2xl p-8 shadow-md text-center">
                             <HeartHandshake className="mx-auto text-[#1D6205] mb-4" size={40} />
                             <h4 className="text-xl font-semibold text-gray-800 mb-2">
                                 Faith-Driven Impact
@@ -145,7 +151,7 @@ const Donate = () => {
                             </p>
                         </div>
 
-                        <div className="bg-white rounded-2xl p-8 shadow-md text-center">
+                        <div className="bg-gray-100 rounded-2xl p-8 shadow-md text-center">
                             <Users className="mx-auto text-[#1D6205] mb-4" size={40} />
                             <h4 className="text-xl font-semibold text-gray-800 mb-2">
                                 Lives Transformed

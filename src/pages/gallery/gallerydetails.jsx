@@ -1,9 +1,10 @@
 // pages/gallery/GalleryDetail.jsx
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import { client } from "../../lib/sanity";
-import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
+import SEO from "../../components/seo";
 
 const GalleryDetail = () => {
   const { albumId } = useParams();
@@ -35,10 +36,26 @@ const GalleryDetail = () => {
 
   return (
     <>
-      <Navbar />
-      <div className="pt-28 pb-20 px-4 sm:px-6 lg:px-20 bg-gray-50 min-h-screen">
+      <SEO
+        title={
+          album?.title
+            ? `${album.title} | Pleroma Sycamore Foundation Gallery`
+            : "Gallery | Pleroma Sycamore Foundation"
+        }
+        description={
+          album?.title
+            ? `Photos from ${album.title}, a community program by Pleroma Sycamore Foundation in Ghana.`
+            : "Photos from our programs and community initiatives in Ghana."
+        }
+        path={`/gallery/${albumId}`}
+        image={album?.coverImage}
+      />
+      <div
+        className="pb-20 px-4 sm:px-6 lg:px-20 bg-gray-50 min-h-screen"
+        style={{ paddingTop: "calc(var(--nav-height) + 1rem)" }}
+      >
         <div className="mb-10 text-center">
-          <Link to="/gallery" className="text-sm text-green-700 hover:underline block mb-2 mt-14">
+          <Link to="/gallery" className="text-sm text-green-700 hover:underline block mb-2">
             ← Back to albums
           </Link>
           <h2 className="text-3xl font-bold text-gray-800">
@@ -48,53 +65,70 @@ const GalleryDetail = () => {
 
         <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {images.map((img, idx) => (
-            <img
+            <motion.img
               key={img._id}
               src={img.src}
               alt=""
               className="rounded-lg h-64 w-full object-cover cursor-pointer hover:scale-105 transition-transform duration-300"
               onClick={() => setSelectedIndex(idx)}
+              initial={{ y: 20 }}
+              whileInView={{ y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.4, delay: (idx % 9) * 0.05, ease: "easeOut" }}
             />
           ))}
         </div>
 
-        {selectedIndex !== null && (
-          <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 backdrop-blur-sm"
-            onClick={() => setSelectedIndex(null)}
-          >
-            <button
-              className="absolute left-5 text-white text-5xl hover:text-green-300"
-              onClick={(e) => {
-                e.stopPropagation();
-                setSelectedIndex((selectedIndex - 1 + images.length) % images.length);
-              }}
-            >
-              ‹
-            </button>
-            <img
-              src={images[selectedIndex].src}
-              alt="Gallery"
-              className="max-h-[80vh] max-w-[90vw] object-contain rounded-lg shadow-xl"
-              onClick={(e) => e.stopPropagation()}
-            />
-            <button
-              className="absolute right-5 text-white text-5xl hover:text-green-300"
-              onClick={(e) => {
-                e.stopPropagation();
-                setSelectedIndex((selectedIndex + 1) % images.length);
-              }}
-            >
-              ›
-            </button>
-            <button
-              className="absolute top-5 right-5 text-white text-3xl font-bold hover:text-red-400"
+        <AnimatePresence>
+          {selectedIndex !== null && (
+            <motion.div
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 backdrop-blur-sm"
               onClick={() => setSelectedIndex(null)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
             >
-              &times;
-            </button>
-          </div>
-        )}
+              <button
+                className="absolute left-5 text-white text-5xl hover:text-green-300"
+                aria-label="Previous image"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelectedIndex((selectedIndex - 1 + images.length) % images.length);
+                }}
+              >
+                ‹
+              </button>
+              <motion.img
+                key={selectedIndex}
+                src={images[selectedIndex].src}
+                alt="Gallery"
+                className="max-h-[80vh] max-w-[90vw] object-contain rounded-lg shadow-xl"
+                onClick={(e) => e.stopPropagation()}
+                initial={{ opacity: 0, scale: 0.97 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
+              />
+              <button
+                className="absolute right-5 text-white text-5xl hover:text-green-300"
+                aria-label="Next image"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelectedIndex((selectedIndex + 1) % images.length);
+                }}
+              >
+                ›
+              </button>
+              <button
+                className="absolute top-5 right-5 text-white text-3xl font-bold hover:text-red-400"
+                aria-label="Close gallery"
+                onClick={() => setSelectedIndex(null)}
+              >
+                &times;
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
       <Footer />
     </>

@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import grant from "../../assets/images/grant.jpg";
-import Navbar from "../../components/navbar";
-import { Helmet } from "react-helmet-async";
+import SEO from "../../components/seo";
 import Footer from "../../components/footer";
 
 const NewGrant = () => {
@@ -17,18 +16,17 @@ const NewGrant = () => {
 
   return (
     <>
-      <Navbar />
 
-      <Helmet>
-        <title>Grants & Funding Opportunities | Pleroma Sycamore Foundation – Faith-Based NGO in Ghana</title>
-        <meta
-          name="description"
-          content="Grant applications for the Pleroma-Sycamore Small Grants Program 2026 are currently closed. Stay connected for updates on the next funding cycle."
-        />
-      </Helmet>
+      <SEO
+        title="Grants & Funding | Pleroma Sycamore Foundation"
+        description="Grant applications for the Pleroma-Sycamore Small Grants Program are currently closed. Stay connected for updates on the next funding cycle."
+        path="/grants-application"
+        image={grant}
+      />
 
       <motion.div
-        className="bg-gray-50 mt-20 overflow-x-hidden relative"
+        className="bg-gray-50 overflow-x-hidden relative"
+        style={{ marginTop: "var(--nav-height)" }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
