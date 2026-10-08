@@ -13,6 +13,10 @@ dist-ssr
 *.local
 .env
 
+# Claude Code: keep shared config (launch.json, settings.json), ignore
+# personal/per-machine files
+.claude/settings.local.json
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
